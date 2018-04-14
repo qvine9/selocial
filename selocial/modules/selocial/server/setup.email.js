@@ -1,0 +1,1 @@
+Accounts.emailTemplates.from = "Selocial <info@selocial.com>";

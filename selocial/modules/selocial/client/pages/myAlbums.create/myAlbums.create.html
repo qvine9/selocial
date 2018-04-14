@@ -1,0 +1,160 @@
+<form id="my-music-tour-3" class="form" ng-submit="page.saveAlbum()">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">Tracks</div>
+                <div class="panel-body">
+
+                    <div class="col-xs-12 col-sm-6">
+                        <div ng-model="page.tracks" class="track-results">
+                            <div ng-repeat="audioTrack in page.tracks"
+                                 ng-show="$index >= searchResultPage*5 && $index < (searchResultPage + 1) * 5"
+                                 audio-track="audioTrack" add-handle="true" handle-icon="plus" on-click="page.addTrack(audioTrack)"></div>
+                        </div>
+
+                        <div class="row" ng-if="searchResultPageCount">
+                            <div class="col-xs-3">
+                                <button type="button" class="btn btn-default btn-sm" ng-if="searchResultPage > 0" ng-click="page.prevPage()">
+                                    <i class="fa fa-chevron-left"></i>
+                                </button>
+                            </div>
+                            <div class="col-xs-6 text-center">
+                                <p class="input-size text-muted">Page {{ searchResultPage+1 }} of {{ searchResultPageCount }}</p>
+                            </div>
+                            <div class="col-xs-3 text-right">
+                                <button type="button" class="btn btn-default btn-sm" ng-if="searchResultPage < searchResultPageCount - 1" ng-click="page.nextPage()">
+                                    <i class="fa fa-chevron-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12 col-sm-6 pull-right">
+                        <div class="tracklist" ng-model="page.album.tracks">
+
+                            <div ng-repeat="audioTrack in page.album.tracks"
+                                 ng-if="page.album.tracks.length"
+                                 audio-track="audioTrack" add-handle="true" handle-icon="minus" on-click="page.removeTrack(audioTrack)"></div>
+
+                            <div class="drop-tracks-info" ng-if="!page.album.tracks.length">
+                                <h1 class="playful-text">Add selected tracks here...</h1>
+                                <p>... or click on the track title to add / remove</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">Cover Images</div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <button type="button" class="btn btn-primary btn-block btn-add-more" ng-click="page.uploadCoverArt(false)" ng-if="!page.album.images.length">Upload Cover Images</button>
+                        <div ng-if="page.album.images.length">
+                            <button type="button" class="btn btn-primary btn-block btn-add-more" ng-click="page.uploadCoverArt(true)">More Cover Images? </button>
+
+                            <div class="row narrow-gutter">
+                                <div class="col col-xs-6" ng-repeat="image in page.album.images">
+                                    <span class="thumbnail">
+                                        <a href="javascript:" class="btn btn-danger btn-remove" title="Remove Photo" ng-click="page.removePhoto($index)">
+                                            <i class="fa fa-trash"></i>
+                                        </a>
+                                        <img class="img-responsive" ng-src="{{ image.url }}" />
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">Details</div>
+                <div class="panel-body">
+
+                    <div class="form-group">
+                        <label class="control-label">Title of Release</label>
+                        <input type="text" class="form-control" ng-model="page.album.title" placeholder="{{ page.musicFile.metadata.title }}">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">ISLR number</label>
+                        <input type="text" class="form-control" ng-model="page.album.catalogId" placeholder="Catalog ID number">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">Record Label</label>
+                        <input type="text" class="form-control" ng-model="page.album.recordLabel" placeholder="">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">Date of Release</label>
+                        <span class="input-group" ng-init="showDatePicker=false">
+                            <input type="text" class="form-control" ng-model="page.album.releaseDate"
+                                   uib-datepicker-popup="{{$root.config.dateFormat}}" datepicker-options="page.releaseDateOptions"
+                                   is-open="showDatePicker" ng-click="showDatePicker=true" placeholder="dd/mm/yyyy" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="showDatePicker=!showDatePicker">
+                                    <i class="fa fa-calendar"></i>
+                                </button>
+                            </span>
+                        </span>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-xs-4">
+                                <label class="control-label">Purchasable</label>
+                                <input bs-switch ng-model="page.album.purchasable" type="checkbox" ng-true-value="true" ng-false-value="false" switch-on-text="Yes" switch-off-text="No" >
+                            </div>
+                            <div class="col-xs-8" ng-if="page.album.purchasable">
+                                <label class="control-label">Album Price</label>
+                                <span class="input-group">
+                                    <input type="number" step="0.01" class="form-control" ng-model="page.album.price">
+                                    <span class="input-group-addon">$</span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <img class="img-responsive" ng-src="{{ page.musicFile.process.thumbnailUrl }}"/>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAGGING -->
+            <div id="my-music-tour-4" class="panel panel-default">
+                <div class="panel-heading">
+                    Tagging
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label class="control-label">Genres</label>
+                        <ui-select multiple ng-model="page.track.genres" theme="bootstrap" close-on-select="true" title="Choose Genres">
+                            <ui-select-match placeholder="Select Genres...">{{$item}}</ui-select-match>
+                            <ui-select-choices repeat="genre in $root.config.genres | filter:$select.search">
+                              {{genre}}
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">Emotions</label>
+                        <ui-select multiple ng-model="page.track.emotions" theme="bootstrap" close-on-select="true" title="Choose Emotions">
+                            <ui-select-match placeholder="Select Emotions...">{{$item}}</ui-select-match>
+                            <ui-select-choices repeat="emotion in $root.config.emotions | filter:$select.search">
+                              {{emotion}}
+                            </ui-select-choices>
+                        </ui-select>
+                        <p class="help-block">This helps our users find your music. </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="form-group text-right">
+        <button id="my-music-tour-5" type="submit" class="btn btn-primary" ng-click="page.next()">Create Album</button>
+    </div>
+</form>

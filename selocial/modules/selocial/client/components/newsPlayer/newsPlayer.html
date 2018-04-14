@@ -1,0 +1,15 @@
+<div class="news-player" ng-class="{'offcanvas': app.isNavbarOpen, 'is-empty': !$root.mediaPlayer.news.length}">
+    <span class="news-inner" ng-if="$root.mediaPlayer.news.length">
+        <span class="news-label">News</span>
+        <span class="single-line scrolling-text" text-scroller="$root.mediaPlayer.news">
+            <span class="scrolling-text-content">
+                <span class="news-item" ng-repeat="news in $root.mediaPlayer.news track by $index">
+                    <a target="_blank" ng-href="{{ news.url }}"><span ng-bind-html="news.title"></span> <span class="domain" ng-bind="news.domain"></span></a>
+                </span> 
+                <span class="news-item" ng-repeat="news in $root.mediaPlayer.news track by $index">
+                    <a target="_blank" ng-href="{{ news.url }}"><span ng-bind-html="news.title"></span> <span class="domain" ng-bind="news.domain"></span></a>
+                </span> 
+            </span> 
+        </span>
+    </span>
+</div>

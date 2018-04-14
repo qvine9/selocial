@@ -1,0 +1,23 @@
+md-backdrop.md-select-backdrop {
+    z-index:1142;
+}
+
+.md-select-menu-container {
+    z-index:1143;
+}
+
+.section-header-group md-input-container {
+    margin: 0;
+}
+
+.panel.panel-primary .panel-heading a {
+    color: #fff;
+}
+
+body, html body {
+    top: 0 !important;
+}
+
+.panel .panel-heading {
+    text-transform: none !important;
+}

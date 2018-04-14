@@ -1,0 +1,92 @@
+.fade {
+    opacity: 1;
+    transition: opacity 1s;
+}
+
+.fade.ng-hide {
+    display: block !important;
+    opacity: 0;
+}
+
+.show-scale-left {
+    transition: 0.2s linear transform;
+    transform-origin: 100% 0;
+        
+    &.ng-enter {
+        transform: scaleX(0);
+    }
+
+    &.ng-enter.ng-enter-active {
+        transform: scaleX(1);
+    }
+
+    &.ng-leave {
+        transition: 0.2s linear transform;
+        transform: scaleX(1);
+    }
+
+    &.ng-leave.ng-leave-active {
+        transform: scaleX(0);
+    }
+
+}
+
+
+@-webkit-keyframes scroll{
+  100%{
+    background-position:-3000px 0px;
+  }
+}
+
+@-moz-keyframes scroll{
+  100%{
+    background-position:-3000px 0px;
+  }
+}
+
+@-o-keyframes scroll{
+  100%{
+    background-position:-3000px 0px;
+  }
+}
+
+@-ms-keyframes scroll{
+  100%{
+    background-position:-3000px 0px;
+  }
+}
+
+@keyframes scroll{
+  100%{
+    background-position:-3000px 0px;
+  }
+}
+
+
+/*
+@-webkit-keyframes scroll100{
+    0% { tranform: translateX(0); }
+  100% { tranform: translateX(100%); }
+}
+
+@-moz-keyframes scroll100{
+  0% { tranform: translateX(0); }
+  100% { tranform: translateX(100%); }
+}
+
+@-o-keyframes scroll100{
+  0% { tranform: translateX(0); }
+  100% { tranform: translateX(100%); }
+}
+
+@-ms-keyframes scroll100{
+  0% { tranform: translateX(0); }
+  100% { tranform: translateX(100%); }
+}
+*/
+
+@keyframes scroll100{
+  0% { transform: translateX(0); }
+  50% { transform: translateX(0); }
+  100% { transform: translateX(-33.333%); }
+}

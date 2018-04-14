@@ -1,0 +1,83 @@
+.well {
+  .box-shadow(none);
+}
+
+a.list-group-item {
+
+  &.active,
+  &.active:hover,
+  &.active:focus {
+    border-color: @list-group-border;
+  }
+
+  &-success {
+    &.active {
+      background-color: @state-success-bg;
+    }
+
+    &.active:hover,
+    &.active:focus {
+      background-color: darken(@state-success-bg, 5%);
+    }
+  }
+
+  &-warning {
+    &.active {
+      background-color: @state-warning-bg;
+    }
+    
+    &.active:hover,
+    &.active:focus {
+      background-color: darken(@state-warning-bg, 5%);
+    }
+  }
+
+  &-danger {
+    &.active {
+      background-color: @state-danger-bg;
+    }
+    
+    &.active:hover,
+    &.active:focus {
+      background-color: darken(@state-danger-bg, 5%);
+    }
+  }
+}
+
+.popover {
+  color: @text-color;
+}
+
+.panel-default > .panel-heading {
+  background-color: @panel-footer-bg;
+}
+
+.row.narrow-gutter {
+    margin-left: @grid-gutter-width / -4;
+    margin-right: @grid-gutter-width / -4;
+    
+    .col {
+        padding-left: @grid-gutter-width / 4;
+        padding-right: @grid-gutter-width / 4;
+    }
+}
+
+.tab-pane {
+    background: #fefdfd;
+    border: 1px solid @gray;
+    border-top: 0 none;
+}
+
+.block-margin {
+    margin-bottom: @grid-gutter-width / 2;
+}
+
+.panel-heading {
+    position: relative;
+    
+    .btn {
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+}

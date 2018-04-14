@@ -1,0 +1,21 @@
+<div class="modal-body track-info">
+    <h4>
+        How do you want to be known?
+    </h4>
+    <form ng-submit="dlg.saveProfile(true)">
+        <div class="form-group">
+            <div class="row">
+                <div class="col-xs-offset-3 col-xs-6">
+                    <a href="javascript:" ng-click="dlg.uploadProfileImage()" class="full-width" profile-card="$root.currentUser._id"></a>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label">Display Name</label>
+            <input type="text" class="form-control" ng-model="$root.currentUser.profile.name" />
+            <p class="help-block">This is the name others will see when you comment or create mixes.</p>
+        </div>
+        
+        <button type="submit" class="btn btn-primary btn-block">Save</button>
+    </form>
+</div>

@@ -1,0 +1,26 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <button type="button" class="btn btn-link" ng-click="showPage('main')">
+            <i class="fa fa-chevron-left"></i>
+        </button>
+        Selomix Details
+    </div>
+    <div class="panel-identity" ng-include="'modules/selocial/client/components/mix/elements/preview.html'"></div>
+    <div class="panel-body">
+        <div class="panel-padding">
+            <h3 class="mix-text-title" ng-bind="comp.mix.title"></h3>
+            <p class="mix-text-body" ng-bind-html="comp.mix.description | socialText"></p>
+
+            <p>
+                <span class="tag" ng-repeat="mention in comp.mix.mentions">
+                    <a ui-sref="channel({name: mention})" class="label label-info">@{{ mention }}</a>
+                </span>
+            </p>
+            <p>
+                <span class="tag" ng-repeat="tag in comp.mix.hashtags">
+                    <a ui-sref="tag({tag: tag})" class="label label-success">#{{ tag }}</a>
+                </span>
+            </p>
+        </div>
+    </div>
+</div>

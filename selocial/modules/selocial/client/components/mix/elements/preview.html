@@ -1,0 +1,10 @@
+<span ng-click="fullscreen()">
+    <img ng-if="comp.mix.video" 
+         ng-src="{{:: comp.mix.video.process.posterUrl | safeUrl }}" 
+         class="mix-preview">
+    
+    <img ng-if="!comp.mix.video" 
+         ng-repeat="image in comp.mix.images" 
+         ng-src="{{:: image.process.thumbnailUrl || image.url | safeUrl }}" 
+         class="mix-preview">
+</span>

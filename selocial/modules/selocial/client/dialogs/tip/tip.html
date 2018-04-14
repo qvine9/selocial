@@ -1,0 +1,26 @@
+<div class="modal-header">
+    <h4 class="modal-title">
+        Send Tip
+    </h4>
+</div>
+<div class="modal-body">
+
+    <p>Send a tip for mix "{{ dlg.mix.title }}":</p>
+
+    <form class="form" ng-submit="dlg.sendTip()">
+        <div class="row narrow-margin">
+            <div class="col-xs-6">
+                <div class="form-group">
+                    <div class="input-group">
+                        <input type="number" step="0.01" class="form-control text-right" ng-model="dlg.amount">
+                        <span class="input-group-addon">$</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-6">
+                <button type="submit" class="btn btn-primary btn-block">Send Tip</button>
+            </div>
+        </div>
+    </form>
+
+</div>

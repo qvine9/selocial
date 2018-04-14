@@ -1,0 +1,69 @@
+<div class="panel panel-default">
+    <div class="panel-heading" ng-if="!modal">
+        Invite Your Friends
+    </div>
+    <div class="panel-body">
+        <h4>Make some noise about selocial</h4>
+        <p>
+            Let your friends know about selocial and get free extra time on your profile for every new user that registers using your referral link.
+        </p>
+        
+        <div class="row">
+            <div class="form-group col-md-12">
+                <label class="control-label">
+                    Your Referral Link
+                </label>
+                <input 
+                    class="form-control"
+                    type="text" 
+                    onClick="this.select();"
+                    value="{{ invite.referralLink }}" />
+            </div>
+
+            <div class="col-sm-6">
+                <h4>
+                    Share your referral link on social media.
+                </h4>
+                <a 
+                    class="btn btn-md btn-twitter"
+                    target="_blank"
+                    ng-href="https://twitter.com/intent/tweet?text=Sign up and refer someone to get free minutes&url={{ invite.referralLink }}&hashtags=selocial, music&via=Selocial">
+                    <i class="fa fa-twitter"></i>
+                </a>
+                <a 
+                    class="btn btn-md btn-facebook"
+                    target="_blank"
+                    ng-href="https://www.facebook.com/sharer/sharer.php?u={{ invite.referralLink }}&title=Check Out Selocial&quote=Sign up and get free minutes&description=Create a Story for Every Moment Instantly. Share Your Photos, Gifs, and Videos with Music">
+                    <i class="fa fa-facebook"></i>
+                </a>
+                <a 
+                    class="btn btn-md btn-google"
+                    target="_blank"
+                    ng-href="https://plus.google.com/share?url={{ invite.referralLink }}">
+                    <i class="fa fa-google-plus"></i>
+                </a>
+            </div>
+            
+            <div class="col-sm-6" ng-if="invite.referral">
+                <h4>Your Referral Stats</h4>
+                <div class="row">
+                    <div class="col-md-6">
+                        <stat-box-number 
+                            count="invite.referral.clicks" 
+                            icon="fa-mouse-pointer" 
+                            title="Clicks">
+                        </stat-box-number>
+                    </div>
+
+                    <div class="col-md-6">
+                        <stat-box-number 
+                            count="invite.referral.registers.length" 
+                            icon="fa-user" 
+                            title="Successful">
+                        </stat-box-number>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

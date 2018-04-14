@@ -1,0 +1,40 @@
+<div ng-if="mix">
+    <div class="fullscreen-player" vertical-fill-panel="-90" height-property="height" width-limit="1">
+        <button type="button" class="btn btn-link btn-close" ng-click="comp.exitFullscreen()">
+            <i class="fa fa-close"></i>
+        </button>
+        
+        <div class="swipe-images-container" ng-if="comp.images && comp.images.length === 1">
+            <div class="swipe-images">
+                <div class="swiper-container swiper-container-horizontal">
+                    <div class="swiper-wrapper">
+                        <span class="swiper-slide" ng-style="{'background-image': 'url('+comp.images[0]+')'}"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="swipe-images-container" swipebox="comp.images" ng-if="comp.images && comp.images.length > 1">
+        </div>
+        
+        <div class="swipe-images-container" ng-if="!comp.images && $root.mediaPlayer.isPlaying && mix._id === $root.mediaPlayer.currentMediaElementId">
+            <div class="swipe-images">
+                <div class="swiper-container swiper-container-horizontal">
+                    <div class="swiper-wrapper">
+                        <video-proxy></video-proxy>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="swipe-images-container" ng-if="!comp.images && (!$root.mediaPlayer.isPlaying || mix._id !== $root.mediaPlayer.currentMediaElementId)">
+            <div class="swipe-images">
+                <div class="swiper-container swiper-container-horizontal">
+                    <div class="swiper-wrapper">
+                        <span class="swiper-slide" ng-style="{'background-image': 'url('+mix.video.process.posterUrl+')'}"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

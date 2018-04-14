@@ -1,0 +1,92 @@
+<div class="text-center" ng-if="noMusic">
+    <button type="button" ng-click="haveNoMusic()" class="btn btn-primary">With Music</button>
+</div>
+
+<div ng-if="!noMusic">
+    <div class="row">
+
+        <div class="col-xs-12 col-sm-6 pull-right">
+            <div class="tracklist-summary">
+                <p>
+                    <span class="label">Time Available:</span>
+                    <span class="value">
+                        {{ totalTime | duration }}
+                        <span ng-if="totalExtraTime" class="tiny">({{ totalExtraTime }}s earned)</span>
+
+                        <i 
+                            class="fa fa-question-circle"
+                            uib-popover-template="'modules/selocial/client/dialogs/time/gain.html'"
+                            popover-title="Get Extra Time"
+                            popover-placement="bottom"
+                            popover-trigger="outsideClick"
+                            popover-animation="true" >    
+                        </i>
+                    </span>
+                </p>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-6">
+            <form class="form" ng-submit="findTracks(audioSearch)" ng-if="!isBrandMode">
+                <div class="form-group">
+                    <div class="input-group">
+                        <input type="text" class="form-control" ng-model="audioSearch" placeholder="Attach Music..." />
+                        <span class="input-group-btn">
+                            <button type="submit" class="btn btn-primary btn-block btn-input">
+                                <i class="hidden-desktop fa fa-search"></i>
+                            </button>
+                        </span>
+                    </div>
+                </div>      
+            </form>
+
+            <h4 class="band-tracklist-title text-center" ng-if="isBrandMode">
+                Choose from your <a class="whitelink" ui-sref="myMusic">own uploaded tracks</a>
+            </h4>
+        </div>
+        
+    </div>
+    <div class="row">
+
+        <div class="col-xs-12 col-sm-6">
+
+            <div ng-if="trackResults.length" ui-sortable="connectedSortableOptions" ng-model="trackResults" class="track-results">
+                <div ng-repeat="audioTrack in trackResults"
+                     ng-show="$index >= searchResultPage*5 && $index < (searchResultPage + 1) * 5" 
+                     audio-track="audioTrack" add-handle="true" handle-icon="plus" on-click="addTrack(audioTrack)"></div>
+            </div>
+
+            <div class="row" ng-if="searchResultPageCount">
+                <div class="col-xs-3">
+                    <button type="button" class="btn btn-default btn-sm" ng-if="searchResultPage > 0" ng-click="prevPage()">
+                        <i class="fa fa-chevron-left"></i>
+                    </button>
+                </div>
+                <div class="col-xs-6 text-center">
+                    <p class="input-size text-muted">Page {{ searchResultPage+1 }} of {{ searchResultPageCount }}</p>
+                </div>
+                <div class="col-xs-3 text-right">
+                    <button type="button" class="btn btn-default btn-sm" ng-if="searchResultPage < searchResultPageCount - 1" ng-click="nextPage()">
+                        <i class="fa fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 pull-right">
+            <div class="tracklist" ui-sortable="selectedSortableOptions" ng-model="selectedTracks">
+
+                <div ng-repeat="audioTrack in selectedTracks"
+                     ng-if="selectedTracks.length" 
+                     audio-track="audioTrack" add-handle="true" handle-icon="minus" on-click="removeTrack(audioTrack)"></div>
+
+                <div class="drop-tracks-info" ng-if="!selectedTracks.length">
+                    <h1 class="playful-text">add selected tracks here...</h1>
+                    <p>... or click on the track title to add / remove</p>
+                    <button type="button" class="btn btn-primary" ng-click="haveNoMusic()" ng-if="canHaveNoMusic">No Music</button>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>

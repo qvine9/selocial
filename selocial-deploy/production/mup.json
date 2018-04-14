@@ -1,0 +1,22 @@
+{
+  "servers": [
+    {
+      "host": "54.172.115.114",
+      "username": "ubuntu",
+      "pem": "~/.ssh/selocial.pem",
+      "env": {}
+    }
+  ],
+  "setupMongo": true,
+  "appName": "selocial",
+  "app": "~/Projects/selocialnode/selocial",
+  "env": {
+    "NODE_ENV": "production",
+    "PORT": 3000,
+    "ROOT_URL": "https://selocial.com",
+    "MAIL_URL": "smtp://AKIAITBEJ66OJPIGAW7A:An1YqIUMbBwF%2F%2BMGXfvfyIV%2BgKbK6mGFWkqtxS8LtLL6@email-smtp.us-east-1.amazonaws.com:465",
+    "HTTP_FORWARDED_COUNT": 1
+  },
+  "deployCheckWaitTime": 15,
+  "enableUploadProgressBar": true
+}

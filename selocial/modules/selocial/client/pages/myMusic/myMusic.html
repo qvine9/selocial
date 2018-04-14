@@ -1,0 +1,33 @@
+<div class="page page-mymusic">
+    <div class="page-content">
+
+        <div id="my-music-tour-1" class="row">
+            <div class="{{ $state.current.name === 'myMusic' ? 'col-sm-12 col-md-8 col-md-offset-2' : 'col-sm-4 col-md-3' }}">
+
+                <div class="form-group text-center">
+                    <button id="my-music-tour-2" type="button" class="btn btn-primary" ng-click="page.uploadMusic()">Upload Music</button>
+
+                </div>
+
+                <div id="my-music-tour-6" class="my-track" ui-sref-active="active" ng-repeat="track in page.myTracks">
+                    <h3>
+                        <a ui-sref="myMusic.track({trackId: track._id})" class="single-line">
+                            {{ track.title }}
+                        </a>
+                    </h3>
+                    <p class="text-muted small">{{ track.artist }} {{page.printAlbumTitle(track)}}</p>
+                    <div audio-track="track"></div>
+                </div>
+
+            </div>
+            <div class="col-sm-8 col-md-9" ui-view>
+
+
+            </div>
+        </div>
+
+    </div>
+    <div ng-if="!page.location().includes('create/mixAudio')">
+        <ng-include src="'modules/selocial/client/layouts/app/tours/my_music_tour.html'"></ng-include>
+    </div>
+</div>

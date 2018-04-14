@@ -1,0 +1,39 @@
+<div class="modal-header">
+    <h4 class="modal-title">
+        Buy Track
+    </h4>
+</div>
+<div class="modal-body" ng-if="dlg.track">
+
+    <p ng-if="!dlg.isPurchased">Buy track "{{ dlg.track.title }}":</p>
+    <div ng-if="dlg.isPurchased">
+        <p>Send Tip</p>
+        <p>You already own <a href="javascript:" ng-click="dlg.gotoPurchase()">{{ dlg.track.title }}</a>, but you can send a tip to the artist:</p>
+    </div>
+
+    <div ng-if="dlg.track.purchasable">
+
+        <form class="form" ng-submit="dlg.buy()">
+            <div class="row narrow-margin">
+                <div class="col-xs-6">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="number" step="0.01" ng-min="dlg.isPurchased ? 0 : dlg.track.price" class="form-control text-right" ng-model="dlg.amount">
+                            <span class="input-group-addon">$</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <button type="submit" class="btn btn-primary btn-block">{{ dlg.isPurchased ? 'Send Tip' : 'Buy Track' }}</button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+    <div ng-if="!dlg.track.purchasable">
+
+        <p>This track is not for purchase yet!</p>
+
+    </div>
+
+</div>

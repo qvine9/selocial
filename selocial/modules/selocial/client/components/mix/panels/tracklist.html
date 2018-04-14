@@ -1,0 +1,14 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <button type="button" class="btn btn-link" ng-click="showPage('main')">
+            <i class="fa fa-chevron-left"></i>
+        </button>
+        Tracklist
+    </div>
+    <div class="panel-identity" ng-include="'modules/selocial/client/components/mix/elements/preview.html'"></div>
+    <div class="panel-content">
+        <div class="panel-padding">
+            <div ng-repeat="audioTrack in comp.mix.tracks" audio-track="audioTrack" on-click="$root.dialog.show('trackInfo', {track: audioTrack}, {size: 'md'})"></div>
+        </div>
+    </div>
+</div>

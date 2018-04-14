@@ -1,0 +1,38 @@
+<div class="audioTrack" ng-class="{open: $root.mediaPlayer.currentMediaElementId === audioTrack._id, 'add-handle': addHandle}">
+
+    <a href="javascript:" ng-click="onClick()" ng-if="addHandle" class="handle">
+        <i class="fa fa-{{:: handleIcon }}"></i>
+    </a>
+
+    <!-- Purchase button -->
+    <a href="javascript:" ng-click="purchase()" class="btn-purchase-track" ng-if="audioTrack.userId !== $root.currentUser._id && audioTrack.source !== 'soundcloud' && $root.auth.hasRole('admin')">
+        <i class="fa fa-music" style="background-color: #2097c8;  padding: 6px 8px; margin-bottom: 5px; font-size: smaller"> Purchase</i>
+    </a>
+
+    <!-- Play button -->
+    <a ng-if="$root.mediaPlayer.currentMediaElementId !== audioTrack._id || !$root.mediaPlayer.isPlaying" href="javascript:" ng-click="play()" class="btn-play">
+        <i class="fa fa-play"></i>
+    </a>
+
+    <!-- Pause button -->
+    <a ng-if="$root.mediaPlayer.currentMediaElementId === audioTrack._id && $root.mediaPlayer.isPlaying" href="javascript:" ng-click="pause()" class="btn-play">
+        <i class="fa fa-pause"></i>
+    </a>
+
+    <h3>
+        <a href="javascript:" ng-click="onClick()" ng-bind="::audioTrack.title"></a>
+    </h3>
+    <p class="audioTrack-meta">
+        <a href="javascript:" ng-click="trackInfo()">
+            by
+            <span class="audioTrack-author" ng-bind="audioTrack.artist || audioTrack.author.username"></span>
+            |
+            <span ng-if="audioTrack.albumId">{{audioTrack.albumTitle}} | </span>
+            <span ng-if="!audioTrack.source">Selocial</span>
+            <span ng-if="audioTrack.source === 'soundcloud'" class="soundcloud-logo"></span>
+        </a>
+
+        <span class="audioTrack-time" ng-bind="audioTrack.file.metadata.duration || audioTrack.file.process.duration | duration"></span>
+    </p>
+
+</div>

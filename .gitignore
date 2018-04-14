@@ -1,0 +1,6 @@
+node_modules/
+selocial/.meteor/local/
+.*~
+bower_components/
+.uploads
+.idea

@@ -1,0 +1,22 @@
+<div ng-controller="facebookUploaderController as facebook">
+    <!-- Not connected -->
+    <div ng-if="!$root.currentUser.services.facebook" 
+         class="jumbotron text-center">
+
+        <p class="playful-text">Upload a file from Facebook</p>
+
+        <div class="small text-muted block-margin">
+            Get images from your or your friend's albums.
+        </div>
+
+        <button ng-click="facebook.connect()" type="button" class="btn btn-facebook">Connect to Facebook</button>
+    </div>
+    
+    <!-- Connected -->
+    <div ng-if="$root.currentUser.services.facebook">
+        <div class="image-picker" 
+             justified-gallery="facebook.photos" 
+             justified-params="{rowHeight:100,lastRow:'nojustify',sort:false}"
+             on-click="dlg.remoteUpload(url)"></div>
+    </div>
+</div>

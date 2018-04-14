@@ -1,0 +1,9 @@
+<div ng-if="!page.channelStream.isLoading">
+    <div ng-if="page.channelStream.mixIds.length" class="channel-background" ng-style="{backgroundImage: 'url(\''+$root.config.searchCoverPhoto+'\')'}" vertical-fill-panel="1" height-property="min-height">
+        <channel data-title="{{ page.channelName }} Mixes" mix-stream="page.channelStream"></channel>
+    </div>
+    <div class="create-first-stream" ng-if="!page.channelStream.mixIds.length">
+        <h1 class="playful-text">No mixes found</h1>
+        <p>We didn't find any mixes with this keyword.</p>
+    </div>
+</div>

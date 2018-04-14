@@ -1,0 +1,199 @@
+/**
+ * Audio track
+ */
+
+.audioTrack {
+    clear: both;
+    margin-bottom: 1px;
+    padding: @selocial-unit-size / 2;
+    background: #302f2f;
+    
+    /**
+    background: darken(@selocial-color-gray, 10%);
+    */
+    &.add-handle {
+        padding-left: 45px;
+        position: relative;
+        
+        .handle {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 40px;
+            height: 100%;
+            background: #000;
+            cursor: pointer;
+            
+            i {
+                position: absolute;
+                width: 20px;
+                height: 20px;
+                text-align: center;
+                line-height: 20px;
+                margin: auto;
+                left: 0;
+                right: 0;
+                top: 0;
+                bottom: 0;
+            }
+        }
+    }
+    
+    &:hover {
+        background: darken(@selocial-color-gray, 15%);
+    }
+    
+    a {
+        color: #fff;
+    }
+    
+    h3 {
+        font-size: 12px;
+        margin: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    
+    .btn-play {
+        float: right;
+        line-height: 100%;
+        font-size: 12px;
+        margin-left: 10px;
+    }
+    
+    .audioTrack-meta {
+        clear: both;
+        font-size: 10px;
+        margin: 0;
+        color: @selocial-text-color-dark;
+    }
+    
+    .audioTrack-author {
+        font-style: italic;
+    }
+    
+    .audioTrack-time {
+        float: right;
+    }
+    
+    .waveform {
+        display: none;
+    }
+    
+    &.open {
+        
+        .waveform {
+            display: block;
+            height: @selocial-unit-size;
+            background-size: 100% 100%;
+            background-color: @selocial-color-primary;
+            
+            .waveform-status {
+                display: block;
+                background: rgba(0,0,0,0.5);
+                height: 100%;
+                transition: width 0.3s;
+            }
+        }
+    }    
+    
+}
+
+.audioTrack-main {
+    clear: both;
+    margin-bottom: 1px;
+    padding: @selocial-unit-size / 2;
+    background: #000;
+    
+    /**
+    background: darken(@selocial-color-gray, 10%);
+    */
+    &.add-handle {
+        padding-left: 45px;
+        position: relative;
+        
+        .handle {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 40px;
+            height: 100%;
+            background: #000;
+            cursor: pointer;
+            
+            i {
+                position: absolute;
+                width: 20px;
+                height: 20px;
+                text-align: center;
+                line-height: 20px;
+                margin: auto;
+                left: 0;
+                right: 0;
+                top: 0;
+                bottom: 0;
+            }
+        }
+    }
+    
+    &:hover {
+        background: darken(@selocial-color-gray, 15%);
+    }
+    
+    a {
+        color: #fff;
+    }
+    
+    h3 {
+        font-size: 12px;
+        margin: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    
+    .btn-play {
+        float: right;
+        line-height: 100%;
+        font-size: 12px;
+        margin-left: 10px;
+    }
+    
+    .audioTrack-meta {
+        clear: both;
+        font-size: 10px;
+        margin: 0;
+        color: @selocial-text-color-dark;
+    }
+    
+    .audioTrack-author {
+        font-style: italic;
+    }
+    
+    .audioTrack-time {
+        float: right;
+    }
+    
+    .waveform {
+        display: none;
+    }
+    
+    &.open {
+        
+        .waveform {
+            display: block;
+            height: @selocial-unit-size;
+            background-size: 100% 100%;
+            background-color: @selocial-color-primary;
+            
+            .waveform-status {
+                display: block;
+                background: rgba(0,0,0,0.5);
+                height: 100%;
+                transition: width 0.3s;
+            }
+        }
+    }    
+    
+}

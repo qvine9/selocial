@@ -1,0 +1,24 @@
+<h4>Top 5 tracks.</h4>
+<p>Tracks that people added to their mix</p>
+
+<div 
+	class="track-single stat-box"
+	ng-repeat="track in tracks">
+	<div class="col-xs-8">
+		<h4>
+			<i class="fa fa-music"></i>  
+			{{ track.title }}
+		</h4>
+
+		<p>
+			Added to <b class="inline-number">{{ track.mixCount }}</b> Unique Mixes.
+		</p>
+	</div>
+
+	<div class="col-xs-4 text-center">
+		<span class="stat-number">{{ track.playCount }}</span>
+		<br/>
+		Plays
+	</div>
+	<div class="clearfix"></div>
+</div>

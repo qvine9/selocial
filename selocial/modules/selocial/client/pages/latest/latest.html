@@ -1,0 +1,32 @@
+<div ng-if="!page.myStream.isLoading">
+    <div class="create-first-stream" ng-if="!page.myStream.mixIds.length" ng-style="{backgroundImage: 'url(\''+$root.currentUser.profile.coverPhoto+'\')'}" vertical-fill-panel="1" height-property="min-height">
+        <div ng-if="page.isBrandMode">
+            <h1 class="playful-text">Let's Get Started!</h1>
+
+            <p id="band-tour-1">You don't have any releases yet. Please upload your music to start.</p>
+            <div class="form-group text-center">
+                    <button type="button" class="btn btn-primary" ng-click="page.uploadMusic()">Upload Music</button>
+            </div>
+
+        </div>
+        <div ng-if="!page.isBrandMode"><a id="user-tour-9" ui-sref="createMix" class="btn btn-lg btn-primary">Create My First Post!</a>
+            <h1 class="playful-text">Let's Get Started! </h1>
+            <p>You don't have any posts yet. Add photos, gifs, or video to online music instantly.</p>
+            
+            <br>
+            <br>
+            <br>
+            <p id="tour-1"></p>
+    </div>
+    </div>
+
+    <div ng-if="page.myStream.mixIds.length" class="channel-background" ng-style="{backgroundImage: 'url(\''+$root.currentUser.profile.coverPhoto+'\')'}" vertical-fill-panel="1" height-property="min-height">
+        <channel data-title="My Stream" mix-stream="page.myStream"></channel>    
+    </div>
+    <div ng-if="page.getRole() === 'notband'">
+        <ng-include src="'modules/selocial/client/layouts/app/tours/user_tour.html'"></ng-include>
+    </div>
+    <div ng-if="page.getRole() === 'band'">
+        <ng-include src="'modules/selocial/client/layouts/app/tours/band_tour.html'"></ng-include>
+    </div>
+</div>

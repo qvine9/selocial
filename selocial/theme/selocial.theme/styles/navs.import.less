@@ -1,0 +1,50 @@
+.nav {
+  .open > a,
+  .open > a:hover,
+  .open > a:focus {
+    border-color: @nav-tabs-border-color;
+  }
+  
+  &.animated.flipInX {
+      .transform-origin(50% 0);
+  }
+}
+
+.nav-tabs > li > a,
+.nav-pills > li > a {
+  color: #fff;
+}
+
+.pager {
+  a,
+  a:hover {
+    color: #fff;
+  }
+
+  .disabled {
+    &>a,
+    &>a:hover,
+    &>a:focus,
+    &>span {
+      background-color: @pagination-disabled-bg;
+    }
+  }
+}
+
+.breadcrumb a {
+  color: #fff;
+}
+
+.navbar-button {
+    display: block;
+    float: right;
+    height: @navbar-height;
+    line-height: @navbar-height;
+    padding: 0 @padding-base-horizontal;
+    color: @selocial-text-color;
+    position: relative;
+}
+
+body > .dropdown-menu {
+    z-index: 101;
+}

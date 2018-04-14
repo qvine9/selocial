@@ -1,0 +1,26 @@
+<div class="hidden">
+<h1>{{ mix.title }}</h1>
+<p>{{ mix.description }}</p>
+
+{{#if mix.video}}
+
+    {{#if mix.video.process}}
+
+        <video src="{{safeUrl mix.video.process.url }}" poster="{{safeUrl mix.video.process.posterUrl }}"></video>
+
+    {{ else }}
+
+        <video src="{{safeUrl mix.video.url }}"></video>
+
+    {{/if}}
+
+{{ else }}
+
+    {{#each mix.images}}
+        <figure>
+            <img src="{{safeUrl process.url }}" alt="{{ ../mix.title }} {{trimExt originalName }}">
+        </figure>
+    {{/each}}
+
+{{/if}}
+</div>

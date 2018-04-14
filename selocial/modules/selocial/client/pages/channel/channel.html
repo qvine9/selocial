@@ -1,0 +1,8 @@
+<div ng-show="!page.channelStream.isLoading" class="channel-background" ng-style="{backgroundImage: 'url(\''+page.channelDetails.coverPhoto.replace('http:', 'https:')+'\')'}" vertical-fill-panel="1" height-property="min-height">
+    <channel ng-if="page.channelStream.mixIds.length" data-title="{{ page.channelName }}'s Channel" mix-stream="page.channelStream"></channel>
+    <div class="create-first-stream" ng-if="!page.channelStream.mixIds.length">
+        <h1 class="playful-text">This channel is empty</h1>
+        <p>{{ page.channelName }} hasn't uploaded any mixes yet.</p>
+        <p>Please check back later.</p>
+    </div>
+</div>

@@ -1,0 +1,9 @@
+<div class="mix-card main" ng-click="$root.$state.go('channel', {name: user.username})">
+    <div class="media-container">
+        <div class="media-element">
+            <span class="media-cover" ng-style="{backgroundImage: 'url(' + ((user.profile.image || $root.config.profile.defaultImage) | safeUrl) + ')'}"></span>
+        </div>
+    </div>
+
+    <h3 class="username" ng-bind="user.profile.name"></h3>
+</div>

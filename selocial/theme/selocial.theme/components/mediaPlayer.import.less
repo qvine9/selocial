@@ -1,0 +1,218 @@
+@media-player-button-size: 47px;
+
+.media-player {
+    padding: 1px;
+    text-align: center;
+
+    .media-player-track {
+        overflow: hidden;
+        position: absolute;
+        top: 11px;
+        left: 0;
+        width: 100%;
+        z-index: 4;
+        padding: 0 10px;
+
+        .soundcloud-logo {
+            position: relative;
+            top: 2px;
+        }
+    }
+
+    .media-player-track-name-container {
+        width: 100%;
+        padding-left: 105px;
+        margin: 0 auto;
+        position: relative;
+
+        .buy-music {
+            position: relative;
+            z-index: 10;
+        }
+
+        .now-playing-label {
+            position: absolute;
+            left: 0;
+            top: -1px;
+        }
+
+        .single-line {
+            display: inline-block;
+            vertical-align: top;
+        }
+
+        .scrolling-text-content.animate-scroll {
+            animation-name: scroll100;
+            animation-duration: 10s;
+            /*animation-delay: 2s;*/
+            animation-iteration-count: infinite;
+            /*animation-timing-function: linear;*/
+        }
+
+        .track-item {
+            padding-right: 15px;
+        }
+    }
+
+    .mix-progress {
+        background: #000;
+        white-space: nowrap;
+        position: relative;
+        margin-bottom: 1px;
+
+        &:before {
+            position: absolute;
+            content: '.';
+            text-indent: -5000px;
+            background: rgba(255,255,255,0.1);
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+        }
+
+        &:after {
+            position: absolute;
+            content: '.';
+            text-indent: -5000px;
+            background: url(@selocial-image-waveform-filter);
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .waveform-overlay {
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 100%;
+            width: 100%;
+            opacity: 0.6;
+            z-index: 3;
+            background: darken(@brand-primary, 10%);
+        }
+
+        span.waveform {
+            position: relative;
+            height: 40px;
+            display: inline-block;
+
+            img {
+                opacity: 0.5;
+            }
+
+            &:after {
+                display: block;
+                content: '.';
+                text-indent: -5000px;
+                width: 2px;
+                height: 5px;
+                background: #444;
+                position: absolute;
+                right: 0;
+                bottom: -6px;
+                opacity: 1;
+                z-index: 4;
+                border-left: 1px solid #222;
+            }
+
+            &:last-child:after {
+                display: none;
+            }
+        }
+
+        img {
+            height: 100%;
+            width: 100%;
+        }
+
+    }
+
+    .track-control-container {
+        /*position: absolute;
+        left: 0;
+        top: -8px;
+        */
+        width: 100%;
+        z-index: 4;
+        //padding: 0 8px 0 0;
+        background: rgba(255,255,255,0.2);
+        //border-left: 8px solid #135c7a;
+    }
+
+    .track-control {
+        border: 0 none;
+        height: 5px;
+        border-radius: 0;
+        background: transparent;
+
+        .ui-slider-range {
+            background: #135c7a;
+        }
+
+        .ui-slider-handle {
+            top: -6px;
+            border-radius: 50%;
+            outline: 0 none !important;
+            width: 17px;
+            height: 17px;
+            background: @brand-primary;
+            border: 1px solid darken(@brand-primary, 10%);
+            z-index: 7;
+        }
+    }
+
+    .play-control-buttons {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: @media-player-button-size;
+
+        .play-button {
+            display: inline-block;
+            height: @media-player-button-size;
+            width: @media-player-button-size;
+            vertical-align: top;
+            line-height: @media-player-button-size;
+            text-align: center;
+            font-size: 20px;
+
+            &:hover {
+                background: #161616;
+                color: #fff;
+            }
+
+            &:active {
+                background: #111;
+            }
+        }
+    }
+
+    .now-playing-time {
+        height: @media-player-button-size;
+        line-height: @media-player-button-size;
+        display: inline-block;
+        vertical-align: top;
+        width: 60px;
+        font-family: 'Share Tech Mono';
+        color: #999;
+    }
+
+    &.media-player-error {
+        .media-player-track {
+            background: @brand-danger !important;
+            color: #fff;
+
+            &:before, &:after {
+                display: none;
+            }
+
+            .waveform-overlay, .waveform {
+                opacity: 0;
+            }
+        }
+    }
+}

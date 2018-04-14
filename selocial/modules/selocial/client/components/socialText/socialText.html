@@ -1,0 +1,12 @@
+<textarea class="form-control" 
+    ng-readonly="!$root.currentUser"
+    spellcheck="false" autogrow required
+    ng-model="text" ng-trim="false"
+    ng-focus="onFocus()"
+    placeholder="{{ placeholder }}"
+    mentio
+    mentio-trigger-char="'@'"
+    mentio-items="users"
+    mentio-template-url="modules/selocial/client/components/socialText/username-mentions.html"
+    mentio-search="searchUsernames(term)"
+    mentio-select="getPeopleTextRaw(item)"></textarea>

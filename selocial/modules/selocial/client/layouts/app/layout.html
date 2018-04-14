@@ -1,0 +1,14 @@
+<div id="appContent" ng-controller="App_LayoutController as app">
+    <ng-include src="'modules/selocial/client/layouts/app/parts/navbar.html'"></ng-include>
+    
+    <news-player></news-player>
+    
+    <div id="content-container" ng-class="{'offcanvas': app.isNavbarOpen}">
+        <div id="content" ui-view autoscroll>
+        </div>
+    </div>
+    
+    <fullscreen-player mix="$root.fullscreenMix"></fullscreen-player>
+
+    <ng-include src="'modules/selocial/client/layouts/app/parts/footer.html'"></ng-include>
+</div>

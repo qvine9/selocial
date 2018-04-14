@@ -1,0 +1,33 @@
+.modal {
+    
+    .modal-dialog {
+        .transform-origin(50% 0);
+        .transition-transform(~"0.3s ease-out");
+    }
+    
+    &.fade .modal-dialog {
+        .scaleY(0);
+    }
+    &.in .modal-dialog { 
+        .scaleY(1) 
+    }
+}
+
+.modal, .modal-backdrop {
+    .transition-transform(~"0.3s ease-out");
+    
+}
+
+.modal-header {
+    .btn-close {
+        position: absolute;
+        right: 3px;
+        top: 3px;
+    }
+}
+
+@media (min-width: @screen-sm-min) {
+    .modal-dialog {
+        margin: 58px auto 30px;
+    }
+}

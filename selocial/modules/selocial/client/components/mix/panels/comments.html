@@ -1,0 +1,14 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <button type="button" class="btn btn-link" ng-click="showPage('main')">
+            <i class="fa fa-chevron-left"></i>
+        </button>
+        Comments
+    </div>
+    <div class="panel-identity" ng-include="'modules/selocial/client/components/mix/elements/preview.html'"></div>
+    <div class="panel-content comment-panel">
+        <div class="panel-padding">
+            <mix-comments mix="comp.mix" mix-id="mixId"></mix-comments>
+        </div>
+    </div>
+</div>

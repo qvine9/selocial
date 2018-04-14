@@ -1,0 +1,112 @@
+<div class="page create-mix-page">
+    <div class="page-content">
+        <div class="row narrow-gutter">
+            <div class="col col-md-3">
+                <div class="panel panel-default" vertical-fill-panel="32" height-property="height">
+                    <div class="panel-heading">
+                        <a ng-if="page.images.length || page.video" title="Reset" href="javascript:" ng-click="page.resetImagesAndVideo()" class="pull-right"><i class="fa fa-trash"></i></a>
+                        Step 1. Add Photos, Gifs, or Video                   </div>
+                    <div class="panel-body">
+
+                        <div id="selomix-tour-2" class="row narrow-gutter" ng-if="!page.images.length && !page.video">
+                            <div class="col col-xs-6">
+                                <button type="button" class="btn btn-primary btn-block" ng-click="page.uploadImages()">Photos / Gifs</button>
+                            </div>
+                            <div class="col col-xs-6">
+                                <button type="button" class="btn btn-primary btn-block" ng-click="page.uploadVideo()">Video</button>
+                            </div>
+                        </div>
+
+                        <div ng-if="page.video" class="wow bounceIn">
+                            <p ng-if="!page.video.process.url">Your video is being processed in the background while you are creating your mix.</p>
+                            <div ng-if="page.video.process.url" class="embed-responsive embed-responsive-16by9">
+                                <video class="embed-responsive-item" controls
+                                       ng-src="{{ page.video.process.url }}" 
+                                       poster="{{ page.video.process.posterUrl }}"></video>
+                            </div>
+                        </div>
+
+                        <div ng-if="page.images.length">
+                            <button type="button" class="btn btn-primary btn-block btn-add-more" ng-click="page.uploadImages(true)">More Photos / Gifs? </button>
+                            
+                            <div class="row narrow-gutter">
+                                <div class="col col-xs-6" ng-repeat="image in page.images">
+                                    <span class="thumbnail">
+                                        <a href="javascript:" class="btn btn-danger btn-remove" title="Remove Photo" ng-click="page.removePhoto($index)">
+                                            <i class="fa fa-trash"></i>
+                                        </a>
+                                        <img class="img-responsive" ng-src="{{ image.url }}" />
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="col col-md-6">
+                <div class="panel panel-default" vertical-fill-panel="32" height-property="height">
+                    <div class="panel-heading">
+                        Step 2. Search for Music
+                    </div>
+                    <div id="selomix-tour-1" class="panel-body">
+
+                        <track-composer id="selomix-tour-3" ng-model="page.musicTracks" can-have-no-music="page.video"></track-composer>
+
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col col-md-3">
+                <div class="panel panel-default" vertical-fill-panel="32" height-property="height">
+                    <div id="selomix-tour-4" class="panel-heading">
+                        Step 3. Add Words
+                    </div>
+                    <div class="panel-body">
+
+                        <div class="form-group">
+                            <label class="control-label">Title (50 characters)</label>
+                            <input class="form-control" type="text" ng-model="page.mix.title" placeholder="Add Some Words..." maxlength="50" />
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label">Description</label>
+                            <social-text ng-model="page.mix.description" autofocus="false" placeholder="Add Hashtag, Tag a Friend, Describe Your Selomix"></social-text>
+                        </div>
+                        
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-sm-6 text-left" style="padding-top:10px; color: #5c5b5b;">
+                                    <label class="control-label">Is This Public?</label>
+                                </div>
+                                <div class="col-sm-6">
+                                    <input id="selomix-tour-5" bs-switch ng-model="page.mix.isPublic" type="checkbox" ng-true-value="true" ng-false-value="false" switch-on-text="Yes" switch-off-text="No" >
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row narrow-gutter">
+                            <div class="col col-sm-6">
+                                <a ui-sref="home" class="btn btn-default btn-block">Cancel</a>
+                            </div>
+                            <div class="col col-sm-6">
+                                <div class="form-group">
+                                    <button id="selomix-tour-7" type="button" ng-click="page.createMix()" class="btn btn-primary btn-block">Publish</button>
+                                </div>
+                                <button ng-if="page.mix._id" type="button" ng-click="page.removeMix()" class="btn btn-danger btn-block">Delete</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div ng-if="page.getRole() === 'notband'">
+        <ng-include src="'modules/selocial/client/layouts/app/tours/create_selomix.html'"></ng-include>
+    </div>
+    <div ng-if="page.getRole() === 'band'">
+        <ng-include src="'modules/selocial/client/layouts/app/tours/create_release.html'"></ng-include>
+    </div>
+</div>

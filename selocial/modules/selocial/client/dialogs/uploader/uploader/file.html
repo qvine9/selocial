@@ -1,0 +1,42 @@
+<div ng-controller="fileUploaderController as fileupload">
+    <!-- Multifile -->
+    <div ng-if="!processingFiles && dlg.params.multiple" ngf-drop="uploadFiles($files)" ngf-drag-over-class="'file-drop-target'" ngf-multiple="true"  class="jumbotron text-center">
+        <p class="playful-text">Drop local files here</p>
+
+        <div class="small text-muted block-margin">or</div>
+
+        <div class="btn btn-primary" ngf-select="uploadFiles($files)"
+             ngf-multiple="true"
+             ngf-pattern="dlg.params.type" ngf-accept="dlg.params.type"
+             ngf-max-size="500MB">Choose local files</div>
+    </div>
+
+    <!-- Singlefile -->
+    <div ng-if="!processingFiles && !dlg.params.multiple" ngf-drop="uploadFile($file)" ngf-drag-over-class="'file-drop-target'" class="jumbotron text-center">
+        <p class="playful-text">Drop a file here</p>
+
+        <div class="small text-muted block-margin">or</div>
+
+        <div class="btn btn-primary" ngf-select="uploadFile($file)"
+             ngf-multiple="false"
+             ngf-pattern="dlg.params.type" ngf-accept="dlg.params.type"
+             ngf-max-size="500MB">Choose a local file</div>
+
+    </div>
+
+    <p ng-if="processingFiles" class="alert alert-info text-center">
+        Please wait while we do some magic with your file(s).
+    </p>
+
+    <!-- Upload queue -->
+    <div class="row" ng-repeat="file in files">
+        <div class="col-xs-8">
+            <p class="single-line small">{{ file.name }}</p>
+        </div>
+        <div class="col-xs-4">
+            <uib-progressbar max="100" value="file.percent" ng-class="{'progress-striped active': file.showIndeterinateProgress}">
+                <span style="color:white;">{{file.percent}}%</span>
+            </uib-progressbar>
+        </div>
+    </div>
+</div>

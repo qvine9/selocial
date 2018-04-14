@@ -1,0 +1,10 @@
+<div id="footer">
+    <div ng-if="!$root.mediaPlayer.hasMedia" class="hidden-xs"  id="copyright-menu">
+        <a ui-sref="docs({id:'terms'})">Terms of Use</a>
+        <a ui-sref="docs({id:'privacy'})">Privacy Policy</a>
+    </div>
+    <div id="copyright" ng-if="!$root.mediaPlayer.hasMedia">
+        <span>Copyright &copy; 2017 Selocial Inc.</span>
+    </div>
+    <media-player></media-player>
+</div>

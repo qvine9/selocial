@@ -1,0 +1,8 @@
+<div class="page">
+    <ul class="nav notifications">
+        <li ng-if="!app.notifications.length"><p class="single-line">You don't have any notifications yet.</p></li>
+        <li ng-repeat="notification in app.notifications">
+            <div notification="notification"></div>
+        </li>
+    </ul>
+</div>

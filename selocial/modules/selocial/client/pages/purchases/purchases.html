@@ -1,0 +1,16 @@
+<div class="page page-mymusic">
+    <div class="page-content">
+
+        <h1>My Purchases</h1>
+
+        <p ng-if="!page.tracks.length">You haven't purchased any tracks yet!</p>
+
+        <ul class="purchase-track-list">
+            <li ng-repeat="track in page.tracks">
+                <a class="btn btn-primary btn-xs" ng-href="/download/{{ track.purchaseId }}" target="_blank">Download</a>
+                {{ track.artist }} - {{ track.title }}
+            </li>
+        </ul>
+
+    </div>
+</div>

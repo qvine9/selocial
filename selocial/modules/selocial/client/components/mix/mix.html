@@ -1,0 +1,37 @@
+<div class="mix-card main" 
+     ng-if="mixPage === 'main'" 
+     ng-class="{active: $root.mediaPlayer.currentMediaElementId === comp.mix._id}"
+     ng-include="'modules/selocial/client/components/mix/panels/main.html'">
+</div>
+
+<div class="mix-card full-card" 
+     ng-if="mixPage === 'details'" 
+     vertical-fill-panel="-90" 
+     height-property="height" 
+     width-limit="-768"
+     ng-include="'modules/selocial/client/components/mix/panels/details.html'">
+</div>
+
+<div class="mix-card full-card" 
+     ng-if="mixPage === 'tracklist'" 
+     vertical-fill-panel="-90" 
+     height-property="height" 
+     width-limit="-768"
+     ng-include="'modules/selocial/client/components/mix/panels/tracklist.html'">
+</div>
+
+<div class="mix-card full-card" 
+     ng-if="mixPage === 'comments'" 
+     vertical-fill-panel="-90" 
+     height-property="height" 
+     width-limit="-768"
+     ng-include="'modules/selocial/client/components/mix/panels/comments.html'">
+</div>
+
+<div class="mix-card full-card" 
+     ng-if="mixPage === 'share'" 
+     vertical-fill-panel="-90" 
+     height-property="height" 
+     width-limit="-768"
+     ng-include="'modules/selocial/client/components/mix/panels/share.html'">    
+</div>

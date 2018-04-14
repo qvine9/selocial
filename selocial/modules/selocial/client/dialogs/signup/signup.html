@@ -1,0 +1,15 @@
+<div class="modal-header">
+    <a href="javascript:" ng-click="$close()" class="btn btn-link btn-close">
+        <i class="fa fa-close"></i>
+    </a>
+    Register  
+</div>
+<div class="modal-body">
+    <signup-form on-signed-up="$close()" band-mode="isBand"></signup-form>
+    <p class="text-center text-muted small">By clicking "Sign Me Up!", you are indicating that you have read and agree to the <a href="/info/tos" target="_blank">Terms of Use</a> and <a href="/info/prvacy" target="_blank">Privacy Policy</a>.</p>
+</div>
+<div class="modal-footer">
+    <a href="javascript:" ng-click="showLogin()" class="btn btn-no-padding btn-link btn-block">
+        I already have an account
+    </a>
+</div>

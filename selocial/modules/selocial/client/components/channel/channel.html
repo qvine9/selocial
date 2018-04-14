@@ -1,0 +1,15 @@
+
+<h2 ng-bind="title"></h2>
+
+
+<div class="stream-container" id="{{ mixStream.id }}" ng-class="{activeStream: $root.mediaPlayer.playlist.id === mixStream.id}">
+    <div class="stream-panel" style="-webkit-overflow-scrolling: touch;" horizontal-scroll>
+        <div class="stream">
+            <user-card ng-repeat="user in mixStream.users track by user._id" user="user"></user-card>
+            <mix class="not-flipped"
+                 ng-repeat="mixId in mixStream.loadedMixIds track by $index" 
+                 mix="mixId" mix-cache="mixStream.mixes[$index]" mix-stream="mixStream"
+                 ng-class="{isActive: $root.mediaPlayer.currentMediaElementId === mix._id}"></mix>
+        </div>
+    </div>
+</div>

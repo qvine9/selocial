@@ -1,0 +1,10 @@
+<a ng-if="notification.params.url" ng-href="{{ notification.params.url }}" class="notification">
+    <span class="message">{{ notification.message }}</span>
+    <span class="date">{{ notification.date | date }}</span>
+</a>
+
+<span ng-if="!notification.params.url" class="notification">
+    <span ng-if="notification.params.followerId" profile-card="notification.params.followerId" link-to-profile="true"></span>
+    <span class="message" ng-bind-html="notification.message"></span>
+    <span class="date">{{ notification.date | date }}</span>
+</span>

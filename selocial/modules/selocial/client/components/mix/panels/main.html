@@ -1,0 +1,75 @@
+<div class="media-container">
+    <a href="javascript:" ng-click="fullscreen()" class="btn btn-link fullscreen-icon">
+        <i class="fa fa-expand"></i>
+    </a>
+
+    <a href="javascript:" ng-click="tip()" class="btn btn-link tip-icon" ng-if="$root.auth.hasRole('admin') && comp.isBandMix">
+        <i class="fa fa-heart"></i>
+    </a>
+
+    <i class="play-icon fa fa-play"
+       ng-hide="$root.mediaPlayer.currentMediaElementId === comp.mix._id && $root.mediaPlayer.isPlaying"
+       ng-click="togglePlayState()"></i>
+
+    <div ng-if=":: comp.mix.video" class="media-element">
+        <span class="media-cover"
+              media-cover="comp.mix.video.process.posterUrl"
+              ng-hide="$root.mediaPlayer.currentMediaElementId === comp.mix._id && $root.mediaPlayer.isPlaying && $root.mediaPlayer.playlist.id === mixStream.id"
+              ng-click="togglePlayState()"></span>
+
+        <div ng-if="$root.mediaPlayer.currentMediaElementId === comp.mix._id && $root.mediaPlayer.isPlaying && !$root.fullscreenMix">
+            <video-proxy></video-proxy>
+        </div>
+    </div>
+
+    <div ng-if=":: !comp.mix.video" class="media-element">
+        <span ng-if="!($root.mediaPlayer.currentMediaElementId === comp.mix._id && $root.mediaPlayer.isPlaying && $root.mediaPlayer.playlist.id === mixStream.id)"
+              class="media-cover"
+              cover-photos="comp.mix.images"
+              mix="comp.mix"
+              ng-click="togglePlayState()"></span>
+
+        <span ng-if="$root.mediaPlayer.currentMediaElementId === comp.mix._id && $root.mediaPlayer.isPlaying && $root.mediaPlayer.playlist.id === mixStream.id"
+              slideshow="comp.mix.images"
+              ng-click="togglePlayState()"></span>
+    </div>
+</div>
+
+<div class="profile-card author">
+    <div profile-card="comp.mix.userId"
+         show-name="true"
+         show-follow="true"
+         link-to-profile="true"></div>
+    <div class="play-count">{{ comp.mix.playCount || 0 }} Plays</div>
+
+    <a ng-if="comp.mix.userId === $root.currentUser._id" ui-sref="createMix({mixId: comp.mix._id})" class="btn btn-link btn-edit btn-xs" title="Edit Mix">
+        edit
+    </a>
+</div>
+
+
+<div class="mix-text" ng-click="showPage('details')">
+    <h3 class="mix-text-title" ng-bind="comp.mix.title"></h3>
+    <p class="mix-text-body" ng-bind-html="comp.mix.description | socialText"></p>
+</div>
+
+<div class="mix-buttons">
+    <button type="button" class="btn btn-default btn-sm" title="Upvote" ng-click="upvote()">
+        {{ comp.mix.upvotesCount || 0 }}
+        <i class="fa fa-chevron-up"></i>
+    </button>
+
+    <button type="button" class="btn btn-default btn-sm" title="Track List" ng-click="showPage('tracklist')">
+        {{ comp.mix.tracks.length || 0 }}
+        <i class="fa fa-music"></i>
+    </button>
+
+    <button type="button" class="btn btn-default btn-sm" title="Comments" ng-click="showPage('comments')">
+        {{ comp.mix.commentsCount || 0 }}
+        <i class="fa fa-comments"></i>
+    </button>
+
+    <button type="button" class="btn btn-default btn-sm" title="Share" ng-click="showPage('share')">
+        <i class="fa fa-share"></i>
+    </button>
+</div>

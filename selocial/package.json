@@ -1,0 +1,24 @@
+{
+  "name": "selocial",
+  "private": true,
+  "scripts": {
+    "start": "meteor run",
+    "dev": "ROOT_URL=https://test.selocial.com/ meteor"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.5.1",
+    "babel-runtime": "^6.23.0",
+    "bcryptjs": "^2.4.0",
+    "body-parser": "^1.15.2",
+    "escape-html": "^1.0.3",
+    "gm": "^1.23.0",
+    "ini": "^1.3.4",
+    "jsonwebtoken": "^7.1.9",
+    "md5": "^2.2.1",
+    "md5-file": "^3.1.1",
+    "meteor-node-stubs": "~0.2.0",
+    "mime": "^1.3.4",
+    "request": "^2.80.0",
+    "stripe": "^4.15.0"
+  }
+}

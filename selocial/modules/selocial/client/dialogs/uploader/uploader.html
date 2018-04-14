@@ -1,0 +1,35 @@
+<div class="modal-header">
+    <a href="javascript:" ng-click="$close()" class="btn btn-link btn-close">
+        <i class="fa fa-close"></i>
+    </a>
+    {{ dlg.params.title }}
+</div>
+<div class="modal-body" ng-class="{uploading: dlg.processingFiles}">
+    
+    <uib-tabset active="activeTab">
+        
+        
+        <uib-tab index="'file'">
+            <uib-tab-heading title="Upload Files">
+                <i class="fa fa-upload"></i>
+            </uib-tab-heading>
+            <div ng-if="activeTab==='file'" ng-include="'modules/selocial/client/dialogs/uploader/uploader/file.html'" class="panel-body"></div>
+        </uib-tab>
+        <!--
+        <uib-tab index="'facebook'" ng-if="dlg.params.type === 'image/*'">
+            <uib-tab-heading title="Facebook">
+                <i class="fa fa-facebook"></i>
+            </uib-tab-heading>
+            <div ng-if="activeTab==='facebook'" ng-include="'modules/selocial/client/dialogs/uploader/uploader/facebook.html'" class="panel-body"></div>
+        </uib-tab>
+        
+        <uib-tab index="'instagram'" ng-if="dlg.params.type === 'image/*'">
+            <uib-tab-heading title="Instagram">
+                <i class="fa fa-instagram"></i>
+            </uib-tab-heading>
+            <div ng-if="activeTab==='instagram'" ng-include="'modules/selocial/client/dialogs/uploader/uploader/instagram.html'" class="panel-body"></div>
+        </uib-tab>
+-->
+    </uib-tabset>
+    
+</div>

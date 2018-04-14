@@ -1,0 +1,7 @@
+<div ng-if="!page.channelStream.isLoading">
+    <channel ng-if="page.channelStream.mixIds.length" data-title="My Followers" mix-stream="page.channelStream"></channel>
+    <div class="create-first-stream" ng-if="!page.channelStream.mixIds.length">
+        <h1 class="playful-text">Hmmm...</h1>
+        <p>Your followers don't seem to be very active.</p>
+    </div>
+</div>

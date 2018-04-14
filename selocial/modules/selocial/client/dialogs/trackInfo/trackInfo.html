@@ -1,0 +1,73 @@
+<div class="modal-body track-info">
+    <h4>
+        {{::track.title}}
+    </h4>
+    <h4 ng-if="::track.releaseType">
+        Release type: {{::track.releaseType}}
+    </h4>
+    <h4 ng-if="::track.albumTitle">
+        Album: {{::track.albumTitle}}
+    </h4>
+    
+    <p class="text-muted small">
+        <span ng-if="::track.recordLabel">
+            {{ ::track.recordLabel }},
+        </span>
+        {{ track.date.substr(0,10) }}
+    </p>
+    
+    <div ng-if="::track.source === 'soundcloud'">
+        
+        <div class="profile-card">
+            <span class="profile-image">
+                <span ng-style="{'background-image': 'url(\'' + (track.author.image || $root.config.profile.defaultImage) + '\')' }"></span>
+            </span>
+            <span class="profile-name">
+                {{track.author.username}} 
+                <span class="text-muted small">@ <span class="soundcloud-logo"></span></span>
+            </span>
+        </div>
+        
+        <a ng-href="{{ track.file.permalink }}" target="_blank"><i class="fa fa-external-link"></i> Open Track</a>
+    </div>
+    
+    <div ng-if="::track.source !== 'soundcloud'">
+        
+        <div class="profile-card">
+            <div profile-card="track.userId" 
+             show-name="true"
+             show-follow="false"
+             link-to-profile="false"></div>
+            <!--
+            <span class="profile-image">
+                <span ng-style="{'background-image': 'url(\'' + ($root.resolve('User', track.userId).profile.image || $root.config.profile.defaultImage) + '\')' }"></span>
+            </span>
+            <span class="profile-name">{{track.artist}} <span class="text-muted small">@ Selocial</span></span>
+            -->
+        </div>
+        
+        <div ng-if="::track.contributors.length > 0">
+            <h5>Contributors</h5>
+            <ul>
+                <li ng-repeat="contributor in ::track.contributors">
+                    <b>{{:: contributor.name }}:</b>
+                    {{:: $root.config.contributorTypes[contributor.type].name }}
+                </li>
+            </ul>
+        </div>
+        
+        <div ng-if="::track.publishers.length > 0">
+            <h5>Publishers</h5>
+            <ul>
+                <li ng-repeat="publisher in ::track.publishers">
+                    <b>{{:: publisher.name }}</b>
+                </li>
+            </ul>
+        </div>
+        
+        <div class="tags">
+            <span ng-repeat="genre in ::track.genres"> <span class="label label-info" ng-bind="genre"></span> </span>
+            <span ng-repeat="emotion in ::track.emotions"> <span class="label label-success" ng-bind="emotion"></span> </span>
+        </div>
+    </div>
+</div>

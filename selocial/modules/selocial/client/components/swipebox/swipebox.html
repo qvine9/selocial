@@ -1,0 +1,20 @@
+<!--
+<a href="javascript:" class="prev nav-button" ng-if="images.length > 1"><i class="fa fa-chevron-left"></i></a>
+<a href="javascript:" class="next nav-button" ng-if="images.length > 1"><i class="fa fa-chevron-right"></i></a>
+-->
+
+<div class="swiper-container">
+    <div class="swiper-wrapper">
+        <!-- Slides -->
+        <div class="swiper-slide" ng-repeat="image in images" ng-style="{'background-image': 'url('+image+')'}"></div>
+    </div>
+    <!-- If we need pagination -->
+    <!--<div class="swiper-pagination"></div>-->
+    
+    <!-- If we need navigation buttons -->
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+    
+    <!-- If we need scrollbar -->
+    <!-- <div class="swiper-scrollbar"></div> -->
+</div>

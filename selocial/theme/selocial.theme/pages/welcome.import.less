@@ -1,0 +1,213 @@
+/**
+ * Welcome page
+ */
+
+.welcome-page.page {
+    background: #333;
+    
+    &.artists {
+        background: url('@{cdn-path}/images/selocialcoffeenewmed.png') no-repeat 50% 28%;
+        background-size: cover;
+        background-attachment: inherit;
+        padding: @selocial-unit-size*2 @selocial-unit-size @selocial-unit-size*3;
+   
+        .text-center {
+            padding: 40px;
+            
+        }
+        
+        .welcome-text {
+           margin-top:250px; 
+            
+        }
+        
+        h4 {
+          @media (max-width: @screen-xs-max) {
+            font-size: 14px;
+            padding-right: 50px;
+            padding-left: 50px;
+            position: relative !important;
+            }
+            
+        }
+        
+        h3 {
+            border-bottom: 4px solid #555;
+        }
+        
+        p {
+        font-size: 30px;
+        margin-top: 30px;
+        margin-bottom: 10px;
+        
+        @media (max-width: @screen-xs-max) {
+            font-size: 20px;
+            margin-bottom: 50px;
+        }
+    }
+    }
+}
+
+.welcome-intro {
+    background: #333333 url('@{cdn-path}/images/selocialcoffeenewmed.png') no-repeat 50% 1%;
+    /**
+    background-size: cover;
+    */
+    background-attachment: inherit;
+    
+    padding: @selocial-unit-size*2 @selocial-unit-size @selocial-unit-size*3;
+    text-align: center;
+    
+    
+    h1, p {
+        text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+    }
+    
+    h1 {
+        font-size: 50px;
+        margin-bottom: 20px;
+        
+        span {
+            color: @selocial-color-highlight;
+        }
+        
+        @media (max-width: @screen-xs-max) {
+            font-size: 30px;
+            margin-top: -10px;
+        }
+    }
+    
+    p {
+        font-size: 30px;
+        margin-top: 30px;
+        margin-bottom: 100px;
+        
+        @media (max-width: @screen-xs-max) {
+            font-size: 20px;
+            margin-bottom: 50px;
+        }
+    }
+    
+    .btn {
+        padding: 12px 70px;
+        font-size: 20px;   
+        
+        @media (max-width: @screen-xs-max) {
+            margin-right: 0;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+    }
+    
+    .btn-primary {
+        margin-right: 40px;
+    }
+    
+    video {
+        width: 600px;
+        height: 337px;
+        max-width: 100%;
+    }
+}
+
+.embeded-channel {
+    margin: auto 0;
+    margin-left: 0;
+    margin-right: 0;
+    display: block;
+    position: relative;
+    text-align: center;
+    background-color: #000000;
+    
+}
+.welcome-text {
+    background: #000000;
+    padding: @selocial-unit-size 10%;
+    color: #FFFFFF;
+    
+    @media (max-width: @screen-xs-max) {
+        padding: @selocial-unit-size;
+    }
+    
+    h2 {
+        border-bottom: 4px solid @selocial-color-primary;
+        font-size: 50px;
+        text-align: center;
+        
+        @media (max-width: @screen-xs-max) {
+            font-size: 30px;
+        }
+        
+        img {
+            width: 90px;
+            vertical-align: baseline;
+            
+            @media (max-width: @screen-xs-max) {
+                width: 50px;
+            }
+        }
+    }
+    
+    .row {
+        
+        h3 {
+            margin-top: 50px;
+            font-size: 30px;
+            text-align: center;
+            
+            @media (max-width: @screen-xs-max) {
+                margin-top: 20px;
+                font-size: 20px;
+            }
+        }
+
+        figure {
+            margin: (@selocial-unit-size * 1.5) auto;
+            height: (@selocial-unit-size * 3);
+            text-align: center;
+            
+            @media (max-width: @screen-xs-max) {
+                margin: (@selocial-unit-size / 2) auto;
+                height: (@selocial-unit-size * 2);
+            }
+            
+            img {
+                width: (@selocial-unit-size * 3);
+                
+                @media (max-width: @screen-xs-max) {
+                    width: @selocial-unit-size * 2;
+                }
+            }
+        }
+        
+        p {
+            text-align: justify;
+        }
+        
+        ul {
+            margin-top: (@selocial-unit-size * 3);
+            
+            @media (max-width: @screen-xs-max) {
+                margin-top: 0;
+            }
+            
+            li {
+                font-size: 18px;
+                margin-bottom: (@selocial-unit-size);
+            }
+        }
+    }
+    
+    @media (max-width: @screen-xs-max) {
+        .col-sm-3.text-right {
+            text-align: center !important;
+        }
+
+    }
+    
+}
+
+.create-first-stream {
+    padding: @selocial-unit-size 0 @selocial-unit-size*2 0;
+    text-align: center;
+}

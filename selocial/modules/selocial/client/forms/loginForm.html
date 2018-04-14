@@ -1,0 +1,39 @@
+<form ng-submit="login()" name="loginForm">
+    
+    <div class="form-group">
+        <div class="row narrow-gutter">
+            <div class="col col-xs-3">
+                <a href="javascript:" ng-click="$root.auth.loginWith('facebook')" class="btn btn-block btn-facebook" uib-tooltip="Connect with your Facebook account">
+                    <i class="fa fa-facebook"></i>
+                </a>
+            </div>
+            <div class="col col-xs-3">
+                <a href="javascript:" ng-click="$root.auth.loginWith('twitter')" target="_self" class="btn btn-block btn-twitter" uib-tooltip="Connect with your Twitter account">
+                    <i class="fa fa-twitter"></i>
+                </a>
+            </div>
+            <div class="col col-xs-3">
+                <a href="javascript:" ng-click="$root.auth.loginWith('google')" target="_self" class="btn btn-block btn-google" uib-tooltip="Connect with your Google account">
+                    <i class="fa fa-google"></i>
+                </a>
+            </div>
+            <div class="col col-xs-3">
+                <a href="javascript:" ng-click="$root.auth.loginWith('soundcloud')" target="_self" class="btn btn-block btn-soundcloud" uib-tooltip="Connect with your Soundcloud account">
+                    <i class="fa fa-soundcloud"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <input type="text" class="form-control" name="username" ng-model="loginUser.username" placeholder="Username" required autofocus />
+    </div>
+    
+    <div class="form-group">
+        <input type="password" class="form-control" name="password" ng-model="loginUser.password" placeholder="Password" required />
+    </div>
+    
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+    </div>
+</form>

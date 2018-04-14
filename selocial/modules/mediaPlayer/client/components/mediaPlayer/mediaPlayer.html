@@ -1,0 +1,75 @@
+<div class="media-player" ng-class="{'media-player-error': $root.mediaPlayer.isError}">
+
+    <div ng-show="$root.mediaPlayer.isError"
+         class="media-player-track" scroll-if-longer="$root.mediaPlayer.currentTrackName">
+        <span class="media-player-track-name-container">
+            <span class="now-playing-label">Missing track! We have notified the mix creator.</span>
+        </span>
+    </div>
+
+    <div ng-show="!$root.mediaPlayer.isError && $root.mediaPlayer.isLoaded && $root.mediaPlayer.currentTrackName"
+         class="media-player-track" scroll-if-longer="$root.mediaPlayer.currentTrackName">
+
+        <span class="media-player-track-name-container" ng-click="trackInfo()">
+            <span class="now-playing-label" ng-if="!$root.mediaPlayer.isError">
+                Now Playing:
+            </span>
+            <span class="single-line">
+                <span class="scrolling-text-content">
+                    <span class="track-item" ng-bind-html="$root.mediaPlayer.currentTrackName | trackTitle">
+                    </span>
+                </span>
+            </span>
+
+        </span>
+    </div>
+
+    <div class="mix-progress" ng-show="$root.mediaPlayer.isLoaded">
+        <span class="waveform-overlay"></span>
+        <span class="waveform waveform-{{:: waveform.id }}"
+              ng-style="{width: waveform.width + '%'}"
+              ng-repeat="waveform in $root.mediaPlayer.currentMediaElement.waveforms"><img class="waveform-image" ng-src="{{ waveform.image | safeUrl }}"></span>
+    </div>
+
+    <div class="track-control-container" ng-show="$root.mediaPlayer.isLoaded">
+        <div class="track-control" ng-show="$root.mediaPlayer.currentMediaElement"></div>
+    </div>
+
+
+    <div class="audioTrack-main" ng-class="{open: $root.mediaPlayer.currentMediaElementId === audioTrack._id, 'add-handle': addHandle}">
+         <a href="javascript:" ng-click="onClick()" ng-if="addHandle" class="handle">
+             </a></div>
+
+    <div class="play-control-buttons" ng-show="$root.mediaPlayer.hasMedia">
+
+
+        <a href="javascript:" ng-click="purchase()" class="btn-purchase-track ng-scope" ng-if="$root.mediaPlayer.currentMediaElement.audioTracks[$root.mediaPlayer.currentTrackIndex].track && $root.mediaPlayer.currentMediaElement.audioTracks[$root.mediaPlayer.currentTrackIndex].track.source !== 'soundcloud' && $root.auth.hasRole('admin')"> <i class="fa fa-music{{:: handleIcon }}" style="background-color:#2097c8;color:#ffffff;padding:6px 8px;margin-bottom:5px;font-size: smaller;padding-top: 10px;display: inline-block;vertical-align:-webkit-baseline-middle;vertical-align:middle;margin-top:8px"> Purchase</i> </a>
+
+        <a href="javascript:" class="play-button"
+           ng-click="$root.mediaPlayer.previous()"
+           ng-if="$root.mediaPlayer.currentIndex > 0"><i class="fa fa-fast-backward"></i></a>
+
+        <a href="javascript:" class="play-button"
+           ng-click="$root.mediaPlayer.previousTrack()"
+           ng-if="$root.mediaPlayer.currentTrackIndex > 0"><i class="fa fa-step-backward"></i></a>
+
+        <a href="javascript:" class="play-button"
+           ng-click="$root.mediaPlayer.play()"
+           ng-if="!$root.mediaPlayer.isPlaying && !$root.mediaPlayer.isError"><i class="fa fa-play"></i></a>
+
+        <a href="javascript:" class="play-button"
+           ng-click="$root.mediaPlayer.pause()"
+           ng-if="$root.mediaPlayer.isPlaying && !$root.mediaPlayer.isError"><i class="fa fa-pause"></i></a>
+
+        <a href="javascript:" class="play-button"
+           ng-click="$root.mediaPlayer.nextTrack()"
+           ng-if="$root.mediaPlayer.currentTrackIndex < $root.mediaPlayer.currentMediaElement.audioTracks.length - 1"><i class="fa fa-step-forward"></i></a>
+
+        <a href="javascript:" class="play-button"
+           ng-click="$root.mediaPlayer.next()"
+           ng-if="$root.mediaPlayer.currentIndex < $root.mediaPlayer.playlist.items.length - 1"><i class="fa fa-fast-forward"></i></a>
+
+        <span class="now-playing-time"></span>
+    </div>
+
+</div>

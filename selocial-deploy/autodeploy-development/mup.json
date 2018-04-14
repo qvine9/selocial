@@ -1,0 +1,22 @@
+{
+  "servers": [
+    {
+      "host": "54.173.99.65",
+      "username": "ubuntu",
+      "pem": "~/.ssh/id_rsa",
+      "env": {}
+    }
+  ],
+  "setupMongo": true,
+  "setupNode": true,
+  "appName": "selocial",
+  "app": "/opt/tmp/selocialnode/selocial",
+  "env": {
+    "NODE_ENV": "production",
+    "PORT": 3000,
+    "ROOT_URL": "http://dev.selocial.com",
+    "HTTP_FORWARDED_COUNT": 1
+  },
+  "deployCheckWaitTime": 120,
+  "enableUploadProgressBar": true
+}

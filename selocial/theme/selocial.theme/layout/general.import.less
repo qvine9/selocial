@@ -1,0 +1,45 @@
+html {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    width: 100%;
+    min-height: 100%;
+}
+
+#app {
+    display: block;
+    position: relative;
+    height: 100%;
+}
+
+#appContent {
+    display: block;
+}
+
+body.offcanvas {
+    overflow: hidden !important;
+}
+
+@media (max-width: @screen-sm-max) {
+    body.flipped {
+        height: 100%;
+        overflow: hidden;
+        
+    }
+}
+
+/*
+@media (max-width: @screen-sm-max) {
+    html.lock-scroll {
+        height: 100%;
+        overflow: hidden;
+        
+        body {
+            height: 100%;
+            overflow: hidden;
+        }
+    }
+}
+*/

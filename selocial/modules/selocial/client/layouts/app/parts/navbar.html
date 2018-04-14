@@ -1,0 +1,213 @@
+<nav class="navbar navbar-fixed-top navbar-inverse">
+    <div class="container-fluid">
+
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" ng-click="app.toggleNav()">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="fa fa-bars"></span>
+            </button>
+            <a class="navbar-brand" ui-sref="home">Selocial</a>
+
+            <a ng-if="!$root.currentUser" class="navbar-button hidden visible-xs" href="javascript:" ng-click="$root.dialog.show('login')">
+                Login
+            </a>
+            <a ng-if="!$root.currentUser" class="navbar-button hidden visible-xs" href="javascript:" ng-click="$root.dialog.show('signup')">
+                Sign Up
+            </a>
+
+            <a ng-if="$root.currentUser && $root.$state.current.name === 'createMix'" class="navbar-button hidden visible-xs" href="javascript:history.back()">
+                <i class="fa fa-close"></i>
+            </a>
+            <a ng-if="$root.currentUser && $root.$state.current.name !== 'createMix'" class="navbar-button hidden visible-xs" ui-sref="createMix">
+                <i class="fa fa-align-left fa-rotate-270"></i>
+            </a>
+            
+        
+            <a ng-if="$root.currentUser && $root.$state.current.name !== 'uploadVideo'" ui-sref="createMix"  class="navbar-button hidden visible-xs" href="javascript:" uib-dropdown-toggle ng-click="app.uploadVideo()">
+                        <span id="user-tour-8" ui-sref="uploadMusic"> </span>
+                 <i class="fa fa-video-camera"></i>
+                </a>
+
+            <a ng-if="$root.auth.hasRole('band')" class="navbar-button hidden visible-xs" ui-sref="uploadMusic" ng-click="app.uploadMusic()">
+                   <i class="fa fa-music"></i>
+                </a>
+
+            <a ng-if="$root.auth.hasRole('band')" class="navbar-button hidden visible-xs" href="javascript:" ui-sref="myMusic">
+                <i class="fa fa-archive"></i>
+            </a>
+            
+            
+
+            <a ng-if="$root.currentUser" class="navbar-button hidden visible-xs" ui-sref="notifications" ng-click="app.resetNotificationCount()">
+                <i class="fa fa-bell"></i>
+                <span class="notification-count" ng-if="$root.currentUser.notificationCount">{{ $root.currentUser.notificationCount }}</span>
+            </a>
+
+            <a  ng-if="$root.currentUser" class="navbar-button hidden visible-xs" ui-sref="searchForm">
+                <i class="fa fa-search"></i>
+            </a>
+
+
+        </div>
+
+        <div class="navbar-collapse offcanvas-nav collapse" ng-class="{'collapse': !app.isNavbarOpen}">
+
+            <!-- Guest menu -->
+            <ul ng-if="!$root.currentUser" class="nav navbar-nav navbar-right">
+                <li><a href="javascript:" ng-click="$root.dialog.show('login');app.isNavbarOpen=false">Sign In</a></li>
+                <li><a href="javascript:" ng-click="$root.dialog.show('signup');app.isNavbarOpen=false">Register</a></li>
+            </ul>
+
+            <!-- Logged in menu -->
+            <ul ng-if="$root.currentUser" class="nav navbar-nav navbar-right">
+
+                <li id="user-tour-6" ng-if="!app.showSearch" class="hidden-xs">
+                    <a href="javascript:" ng-click="app.showSearch = true" class="fa fa-search"></a>
+                </li>
+                <li id='user-tour-7' uib-dropdown class="hidden-xs">
+                    <a href="javascript:" uib-dropdown-toggle ng-click="app.resetNotificationCount()"><i class="fa fa-bell"></i> <span class="notification-count" ng-if="$root.currentUser.notificationCount">{{ $root.currentUser.notificationCount }}</span></a>
+                    <ul class="nav animated flipInX notifications" uib-dropdown-menu>
+                        <li ng-if="!app.notifications.length"><p class="single-line">You don't have any notifications yet.</p></li>
+                        <li ng-repeat="notification in app.notifications">
+                            <div notification="notification"></div>
+                        </li>
+                    </ul>
+                </li>
+                <li uib-dropdown id="profileMenu">
+                    <a href="javascript:" uib-dropdown-toggle class="main-profile-card">
+                        <span class="profile-card" profile-card="$root.currentUser._id"></span>
+                        <span id="user-tour-8" class="hidden-sm">{{ $root.currentUser.profile.name || $root.currentUser.username }}</span>
+                        <code class="hidden-sm" ng-if="$root.currentUser.creditBalance">${{$root.currentUser.creditBalance | number:2}}</code>
+                    </a>
+                    <ul class="nav animated flipInX" uib-dropdown-menu>
+                        <li>
+                            <a ng-if="$root.auth.hasRole('band')" ui-sref="dashboard">
+                                Dashboard
+                            </a>
+                            <a ng-if="!$root.auth.hasRole('band')" ui-sref="settings">
+                                Settings
+                            </a>
+                        </li>
+                        <li><a href="javascript:" ng-click="$root.dialog.show('changePassword');app.isNavbarOpen=false">Change Password</a></li>
+                        <li><a ui-sref="purchases">My Purchases</a></li>
+                        <li ng-if="$root.auth.hasRole('band')"><a ui-sref="payments">My Payments</a></li>
+                        <li class="nav-divider"></li>
+                        <li><a href="javascript:" ng-click="$root.auth.logout()">Logout</a></li>
+                    </ul>
+                </li>
+
+                <li uib-dropdown ng-if="$root.auth.hasRole('band')">
+                    <a href="javascript:" uib-dropdown-toggle>
+                        <i class="fa fa-music"></i>
+                        <span class="hidden-sm"> My Music</span>
+                    </a>
+                    <ul class="nav animated flipInX" uib-dropdown-menu>
+                        <li>
+                            <a id="band-tour-9" ui-sref="myMusic"><i class="fa fa-music"></i>
+                                My Tracks
+                            </a>
+                        </li>
+                        <!--
+                        <li>
+                            <a ui-sref="myAlbums"><i class="fa fa-music"></i>
+                                My Albums
+                            </a>
+                        </li>
+                        -->
+                    </ul>
+                </li>
+                
+                <li uib-dropdown >
+                    <a href="javascript:" uib-dropdown-toggle>
+                        <i class="fa fa-upload"></i>
+                        <span id="user-tour-8" style="cursor: pointer"> Upload</span>
+                         
+                    </a>
+                    <ul class="nav animated flipInX" uib-dropdown-menu>
+                        <li>
+                            <a ng-if="$root.auth.hasRole('band')" ui-sref="uploadMusic" ng-click="app.uploadMusic()"><i class="fa fa-music"></i>
+                                 Music
+                            </a>
+                        </li>
+                        <li>
+                            <a ng-if="$root.$state.current.name !== 'uploadVideo'" ui-sref="createMix" ng-click="app.uploadVideo()"><i class="fa fa-video-camera"></i> Video
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="hidden-xs">
+                    <a id="selomix-tour-6" ng-if="$root.$state.current.name === 'createMix'" href="javascript:history.back()">
+                        <i class="fa fa-close"></i>
+                    </a>
+                </li>
+                <li id="band-tour-11" class="hidden-xs">
+                    <a ng-if="$root.$state.current.name !== 'createMix'" ui-sref="createMix">
+                        <i class="fa fa-align-left fa-rotate-270"></i>
+                        <span class="visible hidden-sm">Create</span>
+                    </a>
+                </li>
+
+                 <li class="hidden hidden-xs">
+                    <a ng-if="$root.auth.hasRole('band') !== 'createMix'" ui-sref="createMix">
+                        <i class="fa fa-align-left fa-rotate-270"></i>
+                        <span class="hidden-sm">Release</span>
+                     </a>
+                </li>
+            </ul>
+
+            <form class="form navbar-form navbar-right show-scale-left" ng-if="app.showSearch || isMobile" ng-submit="app.search(app.searchKeyword)">
+                <div class="form-group">
+                    <span class="input-group">
+                        <input type="text" class="form-control" ng-model="app.searchKeyword" autocomplete="off" autofocus>
+                        <span class="input-group-btn">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </span>
+                    </span>
+                </div>
+            </form>
+
+            <!-- Main menu -->
+            <ul class="nav navbar-nav">
+                <li ng-if="$root.currentUser">
+                    <a ui-sref="latest({name: '/'})" ng-click="app.toggleNav()">
+                        <span id="user-tour-2" class="hidden-sm">My Channel</span>
+                        <i class="hidden visible-sm fa fa-home"></i>
+                    </a>
+                </li>
+
+                <li ng-if="$root.currentUser"><a ui-sref="mostActive" ng-click="app.toggleNav()" id="user-tour-3">Most Active</a></li>
+                <li ng-if="$root.currentUser"><a ui-sref="following" ng-click="app.toggleNav()" id="user-tour-4">Following</a></li>
+                 <li id="user-tour-5"><a ui-sref="channel({name: 'fayre'})">Fayre <span class="featured visible-m" ng-click="app.toggleNav()">Featured Music</span></a></li>
+                <li uib-dropdown id="profileMenu">
+                  <!--  <a href="javascript:" uib-dropdown-toggle>Events</a>
+                            <ul class="nav animated flipInX" uib-dropdown-menu>
+                        <li><a ui-sref="channel({name: 'CES'})">CES 2016 <span class="featured visible-m" ng-click="app.toggleNav()"></span></a></li>
+                        <li><a ui-sref="channel({name: 'Movement'})">Movement Detroit 2015 <span class="featured visible-m" ng-click="app.toggleNav()"></span></a></li>
+                         
+
+
+                </ul>
+-->
+                </li>
+
+            </ul>
+
+            <!-- Mobile footer -->
+            <ul class="nav navbar-nav hidden visible-xs">
+                <li><a ui-sref="docs({id:'terms'})">Terms of Use</a></li>
+                <li><a ui-sref="docs({id:'privacy'})">Privacy Policy</a></li>
+                <li class="nav-divider"></li>
+                <li>
+                    <p>Copyright &copy; 2017 All rights reserved</p>
+                </li>
+            </ul>
+
+            <p class="text-center hidden visible-xs">
+                <img width="100" src="https://dwzrkd09yh5h8.cloudfront.net/images/selocial-logo.png" />
+            </p>
+        </div>
+
+    </div>
+</nav>

@@ -1,0 +1,118 @@
+/**
+ * Create mix page
+ */
+
+.tracklist-summary {
+    height: 45px;
+    margin-bottom: 15px;
+    line-height: 45px;
+    font-size: 18px;
+    text-align: center;
+
+    @media (min-width: 768px) {
+        font-size: 16px;
+    }
+
+    a {
+        color: @selocial-color-blue!important;
+    }
+    p {
+        margin: 0;
+        color: @selocial-text-color-dark!important;
+    }
+
+    .label {
+        color: @selocial-text-color-dark!important;
+    }
+    
+    
+}
+
+.band-tracklist-title {
+    margin: 0;
+    height: 45px;
+    margin-bottom: 15px;
+    line-height: 45px;
+    color: @selocial-text-color-dark!important;
+    
+    .whitelink {
+        color: @selocial-color-blue!important;
+    }
+}
+
+.label {
+        color: @selocial-text-color-dark!important;
+    }
+
+.tracklist {
+    border: 1px dashed lighten(@selocial-color-gray, 10%);
+    min-height: @selocial-unit-size * 10;
+    margin-bottom: @grid-gutter-width;
+
+    &:hover {
+        border-color: lighten(@selocial-color-gray, 20%);
+    }
+
+    .drop-tracks-info {
+        padding: @selocial-unit-size * 3 @selocial-unit-size / 2;
+        color: lighten(@selocial-color-gray, 10%);
+        text-align: center;
+
+        h1 {
+            font-size: 25px;
+            line-height: 100%;
+            margin-bottom: @selocial-unit-size;
+        }
+
+        p {
+            margin: 0;
+            font-size: 14px;
+        }
+        
+        button {
+            margin-top: 10px;
+        }
+    }
+}
+
+.track-results {
+    margin-bottom: @grid-gutter-width / 2;
+}
+
+.control-label {
+    color: #5c5b5b!important;
+}
+
+.create-mix-page {
+    .panel {
+        overflow: hidden;
+        
+        .panel-body {
+            overflow-y: auto;
+            height: 100%;
+            padding-bottom: 40px;
+        }
+    }
+    
+    .btn-add-more {
+        margin-bottom: @selocial-unit-size / 2;
+    }
+    
+    .thumbnail {
+        margin-bottom: @selocial-unit-size / 2;
+        height: 0;
+        padding-bottom: 50%;
+        overflow: hidden;
+        
+        .btn-remove {
+            position: absolute;
+            right: 8px;
+            top: 0px;
+            padding: 0;
+            width: 25px;
+            height: 25px;
+            line-height: 22px;
+            text-align: center;
+        }
+    }
+}

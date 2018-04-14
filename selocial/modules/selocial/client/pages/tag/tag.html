@@ -1,0 +1,11 @@
+<div ng-if="!page.channelStream.isLoading">
+    <channel ng-if="page.channelStream.mixIds.length" data-title="#{{ page.channelName }} Mixes" mix-stream="page.channelStream"></channel>
+    <div ng-if="!page.channelStream.mixes.length">
+
+        <div class="create-first-stream" ng-if="!page.channelStream.mixIds.length">
+            <h1 class="playful-text">#no_mixes_found</h1>
+            <p> We were unable to find any mixes tagged #{{ page.channelName }}</p>
+        </div>
+
+    </div>
+</div>

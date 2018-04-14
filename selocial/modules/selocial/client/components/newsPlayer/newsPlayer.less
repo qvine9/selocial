@@ -1,0 +1,43 @@
+@import '../../../../../theme/selocial.theme.variables.import.less';
+
+.news-player {
+    position: fixed;
+    left: 0;
+    top: @selocial-navbar-height;
+    width: 100%;
+    height: @selocial-news-height;
+    background: @selocial-background;
+    z-index: 99;
+    
+    .news-inner {
+        display: block;
+        padding-left: 50px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .news-label {
+        position: absolute;
+        left: 5px;
+        top: 1px;
+    }
+    
+    .scrolling-text {
+        width: 99.5%;
+        text-align: left;
+    }
+    
+    .news-item {
+        display: inline-block;
+        
+        a {
+            display: block;
+            padding: 0 5px;
+        }
+        
+        .domain {
+            color: #fff;
+            font-size: 80%;
+        }
+    }
+}

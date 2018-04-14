@@ -1,0 +1,32 @@
+<div class="page page-myalbums">
+    <div class="page-content">
+
+        <div id="my-album-tour-1" class="row">
+            <div class="{{ $state.current.name === 'myAlbums' ? 'col-sm-12 col-md-8 col-md-offset-2' : 'col-sm-4 col-md-3' }}">
+                <div class="form-group text-center" ng-if="page.isEditor()">
+                    <button id="my-album-tour-2" type="button" class="btn btn-primary" ng-click="page.createAlbum()">Add Album</button>
+                </div>
+
+                <div id="my-album-tour-6" class="my-album" ui-sref-active="active" ng-repeat="album in page.albums">
+                    <h3>
+                        <a ui-sref="myAlbums.album({albumId: album._id})" class="single-line">
+                            {{ album.title }}
+                        </a>
+                    </h3>
+                    <p class="text-muted small">{{ album.artist }} |
+                        {{ album.tracks.length }}
+                        {{ album.tracks.length == 1 ? " Track" : " Tracks" }} |
+                        {{ page.formatDuration(album.duration)}}
+                    </p>
+                    <div audio-track="track" ng-repeat="track in album.tracks"></div>
+                </div>
+
+            </div>
+            <div class="col-sm-8 col-md-9" ui-view>
+
+
+            </div>
+        </div>
+
+    </div>
+</div>

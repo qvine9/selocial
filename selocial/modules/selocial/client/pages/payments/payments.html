@@ -1,0 +1,155 @@
+<div class="page page-mymusic">
+    <div class="page-content">
+
+        <div class="row">
+            <div class="col-sm-6">
+                <h1>My Payments</h1>
+
+                <div class="panel panel-default" ng-repeat="track in page.myTracks">
+                    <div class="panel-heading">
+                        {{ track.title }}
+                    </div>
+                    <div class="panel-body">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Contributor / Publisher</th>
+                                    <th class="text-right">Sales Royalties</th>
+                                    <th class="text-right">Tip Royalties</th>
+                                    <!--<th class="text-right">Mechanical</th> -->
+                                    <th class="text-right">Owed</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="x in track.contributors">
+                                    <td>{{ x.name }}</td>
+                                    <td class="text-right">{{ page.commissions[track._id + x.name].purchase | number:2 }}</td>
+                                    <td class="text-right">{{ page.commissions[track._id + x.name].tip | number:2 }}</td>
+                                    <!--<td class="text-right">{{ page.commissions[track._id + x.name].mechanical | number:2 }}</td> -->
+                                    <td class="text-right">
+                                        {{ page.commissions[track._id + x.name].unpaid | number:2 }}
+                                        <button ng-if="page.commissions[track._id + x.name].unpaid" type="button" class="btn btn-primary btn-xs" ng-click="page.pay(track._id, x.name)">
+                                            <i class="fa fa-check"></i>
+                                            Paid?
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr ng-repeat="x in track.publishers">
+                                    <td>{{ x.name }}</td>
+                                    <td class="text-right">{{ page.commissions[track._id + x.name].purchase | number:2 }}</td>
+                                    <td class="text-right">{{ page.commissions[track._id + x.name].tip | number:2 }}</td>
+                                    <!-- <td class="text-right">{{ page.commissions[track._id + x.name].mechanical | number:2 }}</td> -->
+                                    <td class="text-right">
+                                        {{ page.commissions[track._id + x.name].unpaid | number:2 }}
+                                        <button ng-if="page.commissions[track._id + x.name].unpaid" type="button" class="btn btn-primary btn-xs" ng-click="page.pay(track._id, x.name)">
+                                            <i class="fa fa-check"></i>
+                                            Paid?
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Selocial Balance</th>
+                                    <th class="text-right">Sales Royalties</th>
+                                    <th class="text-right">Tip Royalties</th>
+                                    <!-- <th class="text-right">Mechanical Royalties</th> -->
+                                    <th class="text-right">Owed</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><b>TOTAL Sales and Tips</b></td>
+                                    <td class="text-right">{{ page.commissions.total.purchase | number:2 }}</td>
+                                    <td class="text-right">{{ page.commissions.total.tip | number:2 }}</td>
+                                    <!-- <td class="text-right">{{ page.commissions.total.mechanical | number:2 }}</td> -->
+                                    <td class="text-right">{{ page.commissions.total.unpaid | number:2 }}</td>
+                                </tr>
+                            </tbody>
+                    </table>
+            </div>
+            <div class="col-sm-6">
+
+                <h1>Your balance is ${{ $root.currentUser.creditBalance | number:2 }}</h1>
+                <div ng-if="$root.currentUser.creditBalance < 5">
+                    <p>The minimum amount to withdraw is $5.</p>
+                </div>
+                <div class="well">
+                    <div ng-if="$root.currentUser.creditBalance >= 5">
+                        <form ng-submit="page.withdraw()">
+
+                            <div class="form-group">
+                                <label class="control-label">Country</label>
+                                <select class="form-control" ng-model="page.bankAccountData.country">
+                                    <option value="UK">Outside of United States</option>
+                                    <option value="US">United States</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group" ng-if="false">
+                                <label class="control-label">Currency</label>
+                                <select class="form-control" ng-model="page.bankAccountData.currency">
+                                    <option value="EUR">EUR</option>
+                                    <option value="GBP">GBP</option>
+                                    <option value="USD">USD</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label">Email Address</label>
+                                <input type="email" class="form-control" ng-model="page.recipientEmail" />
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label">Account Holder Name</label>
+                                <input type="text" class="form-control" ng-model="page.bankAccountData.account_holder_name" />
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label">Account Type</label>
+                                <select class="form-control" ng-model="page.bankAccountData.account_holder_type">
+                                    <option value="individual">Individual</option>
+                                    <option value="company">Company</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group" ng-if="page.bankAccountData.account_holder_type === 'company'">
+                                <label class="control-label">Tax ID</label>
+                                <input type="text" class="form-control" ng-model="page.taxId">
+                            </div>
+
+                            <div ng-if="page.bankAccountData.country === 'US'">
+                                <div class="form-group">
+                                    <label class="control-label">Routing Number</label>
+                                    <input type="text" class="form-control" ng-model="page.bankAccountData.routing_number" />
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label">Account Number</label>
+                                    <input type="text" class="form-control" ng-model="page.bankAccountData.account_number" />
+                                </div>
+                            </div>
+
+                            <div ng-if="page.bankAccountData.country !== 'US'">
+                                <div class="form-group">
+                                    <label class="control-label">IBAN Account Number</label>
+                                    <input type="text" class="form-control" ng-model="page.bankAccountData.account_number" />
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">
+                                Withdraw Now
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>

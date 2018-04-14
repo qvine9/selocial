@@ -1,0 +1,195 @@
+.navbar {
+    border-width: 0;
+    margin-bottom: 0;
+    z-index: 100 !important;
+    
+    .navbar-toggle {
+        margin-top: 10px;
+        margin-bottom: 9px;
+    }
+
+    .navbar-brand {
+        width: 156px;
+        background: url('@{cdn-path}/images/selocial-logo.png') no-repeat 5px center;
+        background-size: 150px;
+        text-align: left;
+        text-indent: -5000px;
+    }
+
+    &-default {
+
+        .badge {
+            background-color: #fff;
+            color: @navbar-default-bg;
+        }
+    }
+
+    &-inverse {
+
+        .badge {
+            background-color: #fff;
+            color: @navbar-inverse-bg;
+        }
+    }
+
+    &-brand {
+        line-height: 1;
+    }
+
+    &-form {
+        .form-control {
+            background-color: white;
+
+            &:focus {
+                border-color: white;
+            }
+        }
+        
+        @media (min-width: @screen-sm-min) {
+            padding: 0;
+        }
+    }
+    
+    li {
+        position: relative;
+        
+        &.highlight {
+            @media (min-width: @screen-sm-min) {
+                a {
+                    background: @selocial-color-important;
+                }
+            }
+        }
+        
+        .featured {
+           display: block;
+           position: absolute;
+           top: -3px;
+           left: 15px;
+           width: 100%;
+           font-size: 10px;
+           color: #00bc6c;
+        }
+        
+        .profile-image {
+            margin: -11px 0;
+        }
+    }
+}
+
+.nav.navbar-nav > li p {
+    padding: @padding-base-vertical @padding-base-horizontal;
+    margin: 0;
+}
+
+.navbar .notifications {
+    width: 300px;
+    max-height: 190px;
+    overflow-y: auto;
+}
+
+.notifications {
+    max-height: 200px;
+    overflow: hidden;
+    overflow-y: auto;
+    
+    a {
+        color: @selocial-color-blue;
+    }
+    .notification {
+        padding: 15px 10px;
+        display: block;
+        border-bottom: 1px solid @gray;
+    }
+    
+    .message {
+        display: block;
+        padding-top: 10px;
+        color: #464545;
+    }
+    
+    .date {
+        display: block;
+        color: @selocial-text-color-dark;
+        font-size: @font-size-small;
+    }
+}
+
+@media (max-width: @screen-xs-max) {
+    
+    .navbar-brand {
+        width: 50px !important;
+    }
+    
+    .navbar-fixed-top .navbar-collapse.offcanvas-nav {
+        transition: transform 0.5s;
+        transform: translateX(0px);
+        margin: 0;
+        position: fixed;
+        width: @selocial-menu-width;
+        padding-bottom: @selocial-footer-height + @selocial-navbar-height;
+        top: 60px;
+        left: 0;
+        height: 100%;
+        max-height: none !important;
+        background: @brand-dark;
+        overflow-y: auto;
+        
+        &.collapse {
+            display: block !important;
+            transform: translateX(-@selocial-menu-width);
+        }
+    }
+    
+    .navbar-toggle {
+        float: left;
+        margin-right: 0;
+    }
+    
+    .nav.navbar-nav > li > a:hover {
+        background: @selocial-menu-highlight;
+        color: @selocial-text-color;
+    }
+    
+    .nav.navbar-nav .open .dropdown-menu {
+        position: static;
+        width: 100%;
+        border-left: @padding-base-horizontal solid darken(@gray-darker, 5%);
+        background: @gray-darker;
+    }
+    
+    
+    .main-profile-card {
+        text-align: center;
+        border-bottom: 1px solid @gray;
+        
+        .profile-image {
+            display: block;
+            width: 100px;
+            margin: 0 auto 10px !important;
+        }
+    }
+    
+    #profileMenu ul {
+        position: relative !important;
+        width: 100%;
+        top: 0 !important;
+    }
+ 
+}
+
+.notification-count {
+    position: absolute;
+    color: #fff !important;
+    top: 17px;
+    right: 0;
+    left: 15px;
+    margin: 0 auto;
+    background: @selocial-color-orange;
+    font-size: 11px;
+    width: 22px;
+    height: 15px;
+    border-radius: 10px;
+    text-align: center;
+    line-height: 15px;
+}

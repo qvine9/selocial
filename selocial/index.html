@@ -1,0 +1,108 @@
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>Selocial</title>
+
+    <meta http-equiv="expires" content="-1">
+    <meta http-equiv="cache-control" content="no-cache">
+
+    <base href="/" />
+
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="//selocial.s3.amazonaws.com/selocialweb/images/selocial-logo-circle.png">
+    <link rel="apple-touch-icon" href="//selocial.s3.amazonaws.com/selocialweb/images/selocial-logo-circle.png" sizes="114x114">
+
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Share+Tech+Mono|Indie+Flower|Cabin:400,500,600,700,400italic,500italic,600italic,700italic">
+
+    <style>
+        /* Loading animation */
+        .spinner{ display: inline-block; width: 25px; height: 25px; border-radius: 50%; position: relative; box-sizing: border-box; border-top: 3px solid transparent; border-right: 5px solid #fff; border-bottom: 5px solid #fff; border-left: 5px solid #fff; -webkit-animation: myspin 1s ease infinite; animation: myspin 1s ease infinite; }
+        .spinner:after { content: ''; position: absolute; top: 50%; left: 50%; margin: -12px; border-radius: 50%; width: 25px; height: 25px; border-top: 1px solid rgba(0,0,0,0); border-right: 5px solid rgba(0,0,0,0); border-bottom: 1px solid rgba(0,0,0,0); border-left: 5px solid #eee; -webkit-animation: myspin 1s reverse ease infinite; animation: myspin 1s reverse ease infinite; box-sizing: border-box; }
+
+        #loadingScreen { display: none; }
+        .loading #loadingScreen { background: #000 url('//selocial.s3.amazonaws.com/selocialweb/images/selocial-logo.png') no-repeat center center; background-size: 300px; display: block; position: fixed; left: 0; top: 0; z-index: 9999; width: 100%; height: 100%; }
+        .loading #loadingScreen .spinner { position: absolute; top: 5px; left: 71px; bottom: 0; right: 0; margin: auto; background: #000; width: 30px; height: 30px; }
+        .loading #loadingScreen .spinner:after { margin: -15px; width: 30px; height: 30px; }
+
+        @-webkit-keyframes myspin { from { -webkit-transform:rotate(0deg); } to { -webkit-transform:rotate(720deg); } }
+                @keyframes myspin { from { transform:rotate(0deg); -webkit-transform:rotate(0deg);} to {transform:rotate(720deg);-webkit-transform:rotate(720deg);} }
+
+        @-webkit-keyframes myspin2 { from { -webkit-transform:rotate(720deg); } to { -webkit-transform:rotate(0deg); } }
+                @keyframes myspin2 { from { transform:rotate(720deg); -webkit-transform:rotate(720deg);} to {transform:rotate(0deg);-webkit-transform:rotate(0deg);} }
+
+    </style>
+
+    <meta property="fb:app_id" content="272943926224935" />
+    <meta property="og:site_name" content="Selocial" />
+    <meta name="twitter:site" content="@selocial" />
+    <meta name="theme-color" content="#000000" />
+
+
+    <!-- META -->
+    <meta property="og:image" content="https://selocial.s3.amazonaws.com/selocialweb/images/selocial-share.jpg" />
+    <!-- /META -->
+
+</head>
+<body class="loading" ng-app="selocial">
+    <!--[if lte IE 8]>
+        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <div id="loadingScreen"><span class="spinner"></span></div>
+
+    <div id="app" ng-include="'modules/selocial/client/layouts/'+($root.layoutName || 'app')+'/layout.html'"><!-- CONTENT --></div>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '272943926224935',
+      xfbml      : true,
+      version    : 'v2.9'
+    });
+    FB.AppEvents.logPageView();
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+    
+    <script>
+        if (/reset-password/.test(location.hash)){
+            window.location.href = location.hash.replace('#', '');
+        } else {
+            if (!/:\/\/localhost/.test(location.href)){
+              if (/Instagram|Twitter/.test(navigator.userAgent)){
+                location.href = 'googlechrome://navigate?url=' + location.href;
+                setTimeout(function(){
+                    location.href = location.href + '#fb'
+                }, 10);
+              } else {
+                if (!/^https:/.test(location.href) && !/(test|dev).selocial.com|192\.168\./.test(location.href)){
+                    location.href = location.href.replace('http', 'https').replace('www.', '');
+                } else if (/www\.selocial\.com/.test(location.href)){
+                    location.href = location.href.replace('www.', '');
+                }
+              }
+            }
+        }
+    </script>
+    <script>
+        if (!/localhost|test.selocial/.test(location.href)){
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        }
+    </script>
+    <script type="text/javascript" src="https://checkout.stripe.com/checkout.js"></script>
+    <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+</body>

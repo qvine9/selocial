@@ -1,0 +1,76 @@
+.text-primary,
+.text-primary:hover {
+  color: lighten(@brand-primary, 10%);
+}
+
+.text-success,
+.text-success:hover {
+  color: @brand-success;
+}
+
+.text-danger,
+.text-danger:hover {
+  color: @brand-danger;
+}
+
+.text-warning,
+.text-warning:hover {
+  color: @brand-warning;
+}
+
+.text-info,
+.text-info:hover {
+  color: @brand-info;
+}
+
+.input-size {
+    padding-top: @padding-base-vertical;
+    padding-bottom: @padding-base-vertical;
+    color: #464545;
+}
+
+.inline-block {
+    display: inline-block;
+}
+
+.single-line {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.playful-text {
+    font-family: 'cabin', Helvetica, Arial, sans-serif;
+    color: black;
+}
+
+.tiny {
+    font-size: 70%;
+}
+
+.whitelink {
+    color: #fff;
+    text-decoration: underline;
+}
+
+.purchase-track-list {
+    list-style: none;
+    padding: 0;
+    margin: 15px 0;
+
+    li {
+        padding: 10px;
+
+        .btn {
+            margin-right: 10px;
+        }
+    }
+}
+
+@media (max-width: @screen-sm-max) {
+
+    h1 {
+        font-size: 30px;
+    }
+
+}

@@ -1,0 +1,21 @@
+<div class="comment" ng-repeat="comment in ctrl.comments">
+    <div class="meta">
+        <span class="profile-card" profile-card="comment.userId" show-name="true" link-to-profile="true"></span>
+        <span class="date">{{ comment.date | date }}</span>
+    </div>
+    <div class="message" ng-bind-html="comment.message | socialText">        
+    </div>
+</div>
+
+<form class="form comment-form" ng-submit="sendComment()">
+    <div class="input-group input-group-textarea">
+        <social-text ng-click="ctrl.warnIfLoggedOut()" 
+                     on-focus="scrollToBottom()" 
+                     on-enter-pressed="sendComment()" 
+                     ng-model="commentMessage" 
+                     placeholder="Add your thoughts (#hashtags, @tag a friend)..."></social-text>
+        <span class="input-group-btn">
+            <button type="submit" class="btn btn-primary">Send</button>
+        </span>
+    </div>
+</form>

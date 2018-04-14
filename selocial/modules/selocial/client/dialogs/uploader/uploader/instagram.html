@@ -1,0 +1,22 @@
+<div ng-controller="instagramUploaderController as instagram">
+    
+    <!-- Not connected -->
+    <div ng-if="!$root.currentUser.services.instagram" 
+         class="jumbotron text-center">
+        <p class="playful-text">Upload a file from Instagram</p>
+
+        <div class="small text-muted block-margin">
+            Get images from your or your friend's photos.
+        </div>
+
+        <button ng-click="instagram.connect()" type="button" class="btn btn-instagram">Connect to Instagram</button>
+    </div>
+    
+    <!-- Connected -->
+    <div ng-if="$root.currentUser.services.instagram">
+        <div class="image-picker" 
+             justified-gallery="instagram.photos" 
+             justified-params="{rowHeight:100,lastRow:'nojustify',sort:false}"
+             on-click="dlg.remoteUpload(url)"></div>
+    </div>
+</div>

@@ -1,0 +1,237 @@
+<form class="form" ng-submit="page.saveTrack()">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="panel-music panel-default">
+                <div class="panel-heading">Details</div>
+                <div class="panel-body">
+
+                    <div class="form-group">
+                        <label class="control-label">Title of Release</label>
+                        <input type="text" class="form-control" ng-model="page.track.title" placeholder="{{ page.musicFile.metadata.title }}" ng-disabled="page.track.albumId">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">ISLR number</label>
+                        <input type="text" class="form-control" ng-model="page.track.catalogId" placeholder="Catalog ID number" ng-disabled="page.track.albumId">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">Record Label</label>
+                        <input type="text" class="form-control" ng-model="page.track.recordLabel" placeholder="" ng-disabled="page.track.albumId">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">Date of Release</label>
+                        <span class="input-group-music-track" ng-init="showDatePicker=false">
+                            <input type="text" class="form-control" ng-model="page.track.releaseDate"
+                                   uib-datepicker-popup="{{$root.config.dateFormat}}" datepicker-options="page.releaseDateOptions"
+                                   alt-input-formats="['yyyy-MM-dd']"
+                                   is-open="showDatePicker" ng-click="showDatePicker=true" placeholder="dd/mm/yyyy"  ng-disabled="page.track.albumId"/>
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="showDatePicker=!showDatePicker" ng-disabled="page.track.albumId">
+                                    <i class="fa fa-calendar"></i>
+                                </button>
+                            </span>
+                        </span>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-xs-4">
+                                <label class="control-label">For Purchase?</label>
+                                <input bs-switch ng-model="page.track.purchasable" type="checkbox"
+                                       ng-true-value="true" ng-false-value="false" switch-on-text="Yes"
+                                       switch-off-text="No" ng-disabled="page.track.albumId">
+                            </div>
+                            <div class="col-xs-8" ng-if="page.track.purchasable">
+                                <label class="control-label">Set Your Price (Minimum Price $1.30)</label>
+                                <span class="input-group-music-track">
+                                    <input type="number" step="0.01" class="form-control" ng-model="page.track.price" ng-disabled="page.track.albumId">
+                                    <span class="input-group-addon">$</span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-primary" ng-click="page.uploadCoverArt()" ng-disabled="page.track.albumId">Upload cover art</button>
+                    </div>
+                    <div class="form-group">
+                        <img class="img-responsive" ng-src="{{ page.track.file.process.thumbnailUrl }}"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Release Type</label>
+                <div>
+                    <div class="btn-group">
+                        <input type="text" class="form-control" ng-model="page.track.releaseType" placeholder="Single" ng-disabled="page.track.albumId">
+                    </div>
+                </div>
+            </div>
+
+            <p class="input-size">Duration: {{ page.musicFile.metadata.duration | duration }}</p>
+
+            <p class="alert alert-warning-commissions" ng-if="!page.commissions.length">There are no commissions yet.</p>
+
+            <div ng-if="page.commissions.length">
+                <h3>Commissions</h3>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>To</th>
+                            <th>Amount</th>
+                            <th>Reason</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="log in page.commissions">
+                            <td>{{ log.date | date:$root.config.dateTimeConfig }}</td>
+                            <td>{{ log.recipient }}</td>
+                            <td>${{ log.amount }}</td>
+                            <td>{{ log.reason }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+        <div class="col-sm-6">
+
+            <!-- TAGGING -->
+            <div class="panel-music panel-default">
+                <div class="panel-heading">
+                    Tagging
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label class="control-label">Genres</label>
+                        <ui-select multiple ng-model="page.track.genres" theme="bootstrap" close-on-select="true" title="Choose Genres" ng-disabled="page.track.albumId">
+                            <ui-select-match placeholder="Select Genres...">{{$item}}</ui-select-match>
+                            <ui-select-choices repeat="genre in $root.config.genres | filter:$select.search">
+                              {{genre}}
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">Emotions</label>
+                        <ui-select multiple ng-model="page.track.emotions" theme="bootstrap" close-on-select="true" title="Choose Emotions" ng-disabled="page.track.albumId">
+                            <ui-select-match placeholder="Select Emotions...">{{$item}}</ui-select-match>
+                            <ui-select-choices repeat="emotion in $root.config.emotions | filter:$select.search">
+                              {{emotion}}
+                            </ui-select-choices>
+                        </ui-select>
+                        <p class="help-block">This helps our users find your music. </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CONTRIBUTORS -->
+            <div class="panel-music panel-default">
+                <div class="panel-heading">
+                    <button type="button" class="btn btn-link" ng-click="page.addContributor()" ng-disabled="page.track.albumId">
+                        <i class="fa fa-plus"></i>
+                    </button>
+                    Contributors
+                </div>
+                <div class="panel-body">
+                    <p ng-if="!page.track.contributors.length">Add writers and performers.</p>
+
+                    <div class="contributor" ng-repeat="contributor in page.track.contributors">
+                        <div class="form-group">
+                            <div class="row narrow-gutter">
+                                <div class="col col-sm-8">
+                                    <select class="form-control" ng-model="contributor.type" ng-options="type as contrib.name for (type,contrib) in $root.config.contributorTypes" ng-disabled="page.track.albumId"></select>
+                                </div>
+                                <div class="col col-sm-4">
+                                    <div class="input-group-music-track">
+                                        <input class="form-control" type="number" step="0.1" ng-model="contributor.percent" placeholder="Percentage"  ng-disabled="page.track.albumId"/>
+                                        <span class="input-group-addon">%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <input class="form-control" type="text" ng-model="contributor.name" placeholder="Name"  ng-disabled="page.track.albumId"/>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- PUBISHERS -->
+            <div class="panel-music panel-default">
+                <div class="panel-heading">
+                    <button type="button" class="btn btn-link" ng-click="page.addPublisher()" ng-disabled="page.track.albumId">
+                        <i class="fa fa-plus"></i>
+                    </button>
+                    Who Owns Publishing? (Must Add Up to 100%)
+                </div>
+                <div class="panel-body">
+                    <p ng-if="!page.track.publishers.length">Add publishers.</p>
+                    <div class="contributor" ng-repeat="publisher in page.track.publishers">
+                        <div class="form-group">
+                            <div class="row narrow-gutter">
+                                <div class="col col-sm-8">
+                                    <input class="form-control" type="text" ng-model="publisher.name" placeholder="Publisher Name"  ng-disabled="page.track.albumId"/>
+                                </div>
+                                <div class="col col-sm-4">
+                                    <div class="input-group-music-track">
+                                        <input class="form-control" type="number" step="0.1" ng-model="publisher.percent" placeholder="Pctg." />
+                                        <span class="input-group-addon">%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" type="text" ng-model="publisher.address" placeholder="Address" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MECHANICAL -->
+            <!--
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <button type="button" class="btn btn-link" ng-click="page.addMechanical()" ng-disabled="page.track.albumId">
+                        <i class="fa fa-plus"></i>
+                    </button>
+                    Who Owns the Mechanicals? (Must Add Up to 100%)
+                </div>
+                <div class="panel-body">
+                    <p ng-if="!page.track.mechanicals.length">Add mechanicals.</p>
+
+                    <div class="contributor" ng-repeat="mechanical in page.track.mechanicals">
+                        <div class="form-group">
+                            <div class="row narrow-gutter">
+                                <div class="col col-sm-8">
+                                    <input class="form-control" type="text" ng-model="mechanical.name" placeholder="Mechanical Name" />
+                                </div>
+                                <div class="col col-sm-4">
+                                    <div class="input-group">
+                                        <input class="form-control" type="number" step="0.1" ng-model="mechanical.percent" placeholder="Pctg." />
+                                        <span class="input-group-addon">%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            -->
+
+            <p>This information will help us track and make the correct payments when your song is uploaded into the future blockchain we are working on, allowing us to send micro-payments directly to the writers/ publishers / performers involved in your track.</p>
+
+        </div>
+    </div>
+
+    <div class="form-group text-right">
+        <button type="button" class="btn btn-danger" ng-click="page.deleteTrack()">Delete Track</button>
+        <button type="submit" class="btn btn-primary" ng-disabled="page.track.albumId">Save Track</button>
+    </div>
+
+</form>

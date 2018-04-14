@@ -1,0 +1,225 @@
+<div class="page">
+    <div class="page-content">
+        
+        <div class="row">
+            <div class="col-sm-6">
+                
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Profile :  <a href="{{ baseUrl }}{{ $root.currentUser.username }}">{{ baseUrl | withoutProtocol }}{{ $root.currentUser.username }}</a>
+                    </div>
+                    <div class="panel-body">
+                        <form class="form" ng-submit="page.saveProfile()">
+                            <div class="row">
+                                <div class="col-lg-3 col-sm-5">
+                                    <div class="form-group">
+                                        <a href="javascript:" ng-click="page.uploadProfileImage()" class="full-width" profile-card="$root.currentUser._id"></a>
+                                        <p>
+                                        </p>
+                                        Username
+                                        <p>
+                                          <a>{{ $root.currentUser.username }}</a>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="col-lg-9 col-sm-7">
+                                    
+                                    <div class="form-group">
+                                        <label class="control-label">Display Name </label>
+                                        <span class="input-group">
+                                            <input type="text" class="form-control" ng-model="$root.currentUser.profile.name" placeholder="{{ $root.currentUser.username }}" />
+                                            <span class="input-group-addon"></span>
+                                        </span>
+                                        <p class="help-block">
+                                            This is the name others will see when you comment or create mixes.<br/>
+                                        </p>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="control-label">Birthday</label>
+
+                                        <span class="input-group" ng-init="showDatePicker=false">
+                                            <input type="text" class="form-control" ng-model="$root.currentUser.profile.dateOfBirth"
+                                                   uib-datepicker-popup="{{$root.config.dateFormat}}" datepicker-options="page.birthdayOptions"
+                                                   is-open="showDatePicker" ng-click="showDatePicker=true" placeholder="dd/mm/yyyy" />
+                                            <span class="input-group-btn">
+                                                <button type="button" class="btn btn-default" ng-click="showDatePicker=!showDatePicker">
+                                                    <i class="fa fa-calendar"></i>
+                                                </button>
+                                            </span>
+                                        </span>
+
+                                        <p class="help-block">So we can wish you a happy birthday!</p>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <div class="col-xs-5 col-sm-4">
+                                            <input bs-switch ng-model="$root.currentUser.profile.privateChannel" type="checkbox" ng-true-value="true" ng-false-value="false">
+                                        </div>
+                                        <div class="col-xs-7 col-sm-8 input-size">
+                                            Private channel
+                                        </div>
+                                        <br />
+                                    </div>
+                                    <p class="help-block">
+                                        Set this and neither your profile nor your mixes will show up in the search results.<br />
+                                        <b>WARNING!</b> This will override all mix-specific private/public settings!
+                                    </p>
+
+                                    <div class="form-group row">
+                                        <div class="col-sm-6">
+                                            <button type="button" class="btn btn-block btn-primary" ng-click="page.uploadCoverPhoto()">
+                                                Upload Cover Photo or Gif
+                                            </button>
+                                            <p class="tiny">Recommended Size: 1920x580</p>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <a href="javascript:" ng-click="page.uploadCoverPhoto()" class="full-width" ng-if="$root.currentUser.profile.coverPhoto">
+                                                <img class="img-responsive" ng-src="{{ $root.currentUser.profile.coverPhoto }}" />
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="text-right">
+                                <button type="submit" class="btn btn-primary">Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-sm-6">
+            
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Statistics
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-sm-6 col-md-4">
+                                <i 
+                                    style="float: right; margin: 10px;"
+                                    class="fa fa-question-circle"
+                                    uib-popover-template="'modules/selocial/client/dialogs/time/gain.html'"
+                                    popover-title="Get Extra Time"
+                                    popover-placement="bottom"
+                                    popover-trigger="outsideClick"
+                                    popover-animation="true">
+                                </i>
+                                <stat-box-number 
+                                    count="totalExtraTime"
+                                    title="Extra Time"
+                                    icon="fa-clock-o">
+                                </stat-box-number>
+                            </div>
+
+                            <div class="col-sm-6 col-md-4">
+                                <stat-box-number 
+                                    count="currentUser.followingCount" 
+                                    title="Following"
+                                    icon="fa-users">
+                                </stat-box-number> 
+                            </div>
+
+                            <div class="col-sm-6 col-md-4">
+                                <stat-box-number 
+                                    count="currentUser.followersCount" 
+                                    title="Followers"
+                                    icon="fa-users">
+                                </stat-box-number> 
+                            </div>
+                        </div>
+                        <div 
+                            class="row"
+                            ng-if="isBrandMode && page.profileStats">
+                            <div class="col-sm-12 col-md-8">
+                                <stat-box-tracks 
+                                    ng-if="page.profileStats.tracksInMix"
+                                    tracks="page.profileStats.tracksInMix">
+                                </stat-box-tracks>
+                            </div>
+
+                            <div class="col-sm-12 col-md-4">
+                                <h4>Track Stats</h4>
+                                <p><br/></p>
+
+                                <stat-box-number 
+                                    count="currentUser.upvotes.length" title="Upvoted"
+                                    icon="fa-chevron-up">
+                                </stat-box-number> 
+
+                                <stat-box-number 
+                                    count="page.profileStats.tracksCount" title="Tracks"
+                                    icon="fa-music">
+                                </stat-box-number> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-sm-6">
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Band Mode
+                    </div>
+                    <div class="panel-body">
+
+                        <!-- USER DOES NOT HAVE BAND MODE TURNED ON -->
+                        <div ng-if="!$root.auth.hasRole('band')">
+                            <h4>Are you an artist, band, or producer?</h4>
+                            <p>Switch to Band Mode now, and upload your own music to the Selocial Music Bank so Selocial fans can add it to their visuals!</p>
+                            
+                            <p class="alert alert-warning">
+                                <i class="fa fa-warning"></i>
+                                <b>WARNING!</b> 
+                                Once you turn on Band mode, you cannot revert to your original account. 
+                                This also means that you won't be able to create releases using other bands' music.
+                            </p>
+
+                            <div class="form-group text-right">
+                                <span class="checkbox inline-block">
+                                    <label>
+                                        <input type="checkbox" ng-model="page.acceptBandMode">
+                                        Accept <a ui-sref="docs({id:'terms'})">Selocial Band Terms and Conditions</a>
+                                    </label>
+                                </span>
+
+                                <button type="button" ng-disabled="!page.acceptBandMode" class="btn btn-primary" ng-click="page.enableBandMode()" tooltip="Switch to Band mode and upload your own tracks!">
+                                    I have a Band
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- BAND MODE TURNED ON -->
+                        <form ng-if="$root.auth.hasRole('band')">
+                            <div class="form-group row">
+                                <div class="col-xs-5 col-sm-4">
+                                    <input bs-switch ng-model="$root.currentUser.profile.bandSettings.public" type="checkbox" ng-true-value="true" ng-false-value="false">
+                                </div>
+                                <div class="col-xs-7 col-sm-8 input-size">
+                                    Others can add my tracks to their mixes
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <invite></invite>
+            </div>
+        </div>
+
+    </div>
+</div>

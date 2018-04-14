@@ -1,0 +1,24 @@
+<a ng-if="linkToProfile" ui-sref="channel({name: card.user.username})" data-image="{{ card.image }}">
+    <span class="profile-image">
+        <span ng-style="{'background-image': 'url(\'' + (card.image || $root.config.profile.defaultImage | safeUrl) + '\')' }"></span>
+    </span>
+
+    <span ng-if="showName" class="profile-name">{{ card.user.profile.name || card.user.username }}</span>
+</a>
+
+<span ng-if="!linkToProfile" data-image="{{ card.image }}">
+    <span class="profile-image">
+        <span ng-style="{'background-image': 'url(\'' + (card.image || $root.config.profile.defaultImage | safeUrl) + '\')' }"></span>
+    </span>
+
+    <span ng-if="showName" class="profile-name">{{ card.user.profile.name || card.user.username }}</span>
+</span>
+
+<button ng-if="showFollow && card.user._id !== $root.currentUser._id && !card.isFollowing" type="button" class="btn btn-primary btn-follow" ng-click="follow()">
+	<span ng-if="!followLoading">Follow</span>
+	<span ng-if="followLoading">.......</span>
+</button>
+<button ng-if="showFollow && card.user._id !== $root.currentUser._id && card.isFollowing" type="button" class="btn btn-default btn-follow" ng-click="follow()">
+	<span ng-if="!followLoading">Unfollow</span>
+	<span ng-if="followLoading">.......</span>
+</button>
